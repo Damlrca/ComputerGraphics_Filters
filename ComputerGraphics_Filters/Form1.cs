@@ -34,14 +34,11 @@ namespace ComputerGraphics_Filters
             pictureBox1.Refresh();
         }
 
-        private void Inverse_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            backgroundWorker1.RunWorkerAsync(new InvertFilter());
-        }
-
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            Bitmap resultImage = ((Filter)e.Argument).processImage(image, backgroundWorker1);
+            //Bitmap resultImage = ((Filter)e.Argument).processImage(image, backgroundWorker1);
+            Bitmap resultImage = ((Filter)e.Argument).processImage(new Bitmap(image), backgroundWorker1);
+
             if (!backgroundWorker1.CancellationPending)
             {
                 image = resultImage;
@@ -66,6 +63,11 @@ namespace ComputerGraphics_Filters
         private void cancel_button_Click(object sender, EventArgs e)
         {
             backgroundWorker1.CancelAsync();
+        }
+
+        private void Inverse_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new InvertFilter());
         }
 
         private void blur_ToolStripMenuItem_Click(object sender, EventArgs e)

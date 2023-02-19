@@ -42,18 +42,20 @@
             this.размытиеВДвиженииToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.выделениеГраницToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.операторПрюиттаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.операторСобеляToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.операторЩарраToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.резкостьToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.резкость1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.резкость2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.cancel_button = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.резкость1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.операторСобеляToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.операторЩарраToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -64,7 +66,7 @@
             this.фильтрыToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(860, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(582, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -99,27 +101,27 @@
             this.чернобелыйToolStripMenuItem,
             this.сепияToolStripMenuItem});
             this.точечныеToolStripMenuItem.Name = "точечныеToolStripMenuItem";
-            this.точечныеToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.точечныеToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
             this.точечныеToolStripMenuItem.Text = "Точечные";
             // 
             // инверсияToolStripMenuItem
             // 
             this.инверсияToolStripMenuItem.Name = "инверсияToolStripMenuItem";
-            this.инверсияToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.инверсияToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
             this.инверсияToolStripMenuItem.Text = "Инверсия";
             this.инверсияToolStripMenuItem.Click += new System.EventHandler(this.Inverse_ToolStripMenuItem_Click);
             // 
             // чернобелыйToolStripMenuItem
             // 
             this.чернобелыйToolStripMenuItem.Name = "чернобелыйToolStripMenuItem";
-            this.чернобелыйToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.чернобелыйToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
             this.чернобелыйToolStripMenuItem.Text = "Черно-белый";
             this.чернобелыйToolStripMenuItem.Click += new System.EventHandler(this.grayScale_ToolStripMenuItem_Click);
             // 
             // сепияToolStripMenuItem
             // 
             this.сепияToolStripMenuItem.Name = "сепияToolStripMenuItem";
-            this.сепияToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.сепияToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
             this.сепияToolStripMenuItem.Text = "Сепия";
             this.сепияToolStripMenuItem.Click += new System.EventHandler(this.Sepia_ToolStripMenuItem_Click);
             // 
@@ -130,7 +132,7 @@
             this.выделениеГраницToolStripMenuItem,
             this.резкостьToolStripMenuItem1});
             this.матричныеToolStripMenuItem.Name = "матричныеToolStripMenuItem";
-            this.матричныеToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.матричныеToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
             this.матричныеToolStripMenuItem.Text = "Матричные";
             // 
             // размытиеToolStripMenuItem1
@@ -173,73 +175,6 @@
             this.операторПрюиттаToolStripMenuItem.Text = "Оператор Прюитта";
             this.операторПрюиттаToolStripMenuItem.Click += new System.EventHandler(this.prewitt_ToolStripMenuItem_Click);
             // 
-            // резкостьToolStripMenuItem1
-            // 
-            this.резкостьToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.резкость1ToolStripMenuItem,
-            this.резкость2ToolStripMenuItem});
-            this.резкостьToolStripMenuItem1.Name = "резкостьToolStripMenuItem1";
-            this.резкостьToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
-            this.резкостьToolStripMenuItem1.Text = "Резкость";
-            // 
-            // резкость2ToolStripMenuItem
-            // 
-            this.резкость2ToolStripMenuItem.Name = "резкость2ToolStripMenuItem";
-            this.резкость2ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.резкость2ToolStripMenuItem.Text = "Резкость2";
-            this.резкость2ToolStripMenuItem.Click += new System.EventHandler(this.sharpness2_ToolStripMenuItem_Click);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 31);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(860, 409);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.progressBar1.Location = new System.Drawing.Point(12, 446);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(379, 23);
-            this.progressBar1.TabIndex = 2;
-            // 
-            // cancel_button
-            // 
-            this.cancel_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cancel_button.Location = new System.Drawing.Point(417, 446);
-            this.cancel_button.Name = "cancel_button";
-            this.cancel_button.Size = new System.Drawing.Size(134, 23);
-            this.cancel_button.TabIndex = 3;
-            this.cancel_button.Text = "Отмена";
-            this.cancel_button.UseVisualStyleBackColor = true;
-            this.cancel_button.Click += new System.EventHandler(this.cancel_button_Click);
-            // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.WorkerReportsProgress = true;
-            this.backgroundWorker1.WorkerSupportsCancellation = true;
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
-            // 
-            // резкость1ToolStripMenuItem
-            // 
-            this.резкость1ToolStripMenuItem.Name = "резкость1ToolStripMenuItem";
-            this.резкость1ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.резкость1ToolStripMenuItem.Text = "Резкость1";
-            this.резкость1ToolStripMenuItem.Click += new System.EventHandler(this.sharpness1_ToolStripMenuItem_Click);
-            // 
             // операторСобеляToolStripMenuItem
             // 
             this.операторСобеляToolStripMenuItem.Name = "операторСобеляToolStripMenuItem";
@@ -254,21 +189,111 @@
             this.операторЩарраToolStripMenuItem.Text = "Оператор Щарра";
             this.операторЩарраToolStripMenuItem.Click += new System.EventHandler(this.scharr_ToolStripMenuItem_Click);
             // 
+            // резкостьToolStripMenuItem1
+            // 
+            this.резкостьToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.резкость1ToolStripMenuItem,
+            this.резкость2ToolStripMenuItem});
+            this.резкостьToolStripMenuItem1.Name = "резкостьToolStripMenuItem1";
+            this.резкостьToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.резкостьToolStripMenuItem1.Text = "Резкость";
+            // 
+            // резкость1ToolStripMenuItem
+            // 
+            this.резкость1ToolStripMenuItem.Name = "резкость1ToolStripMenuItem";
+            this.резкость1ToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.резкость1ToolStripMenuItem.Text = "Резкость1";
+            this.резкость1ToolStripMenuItem.Click += new System.EventHandler(this.sharpness1_ToolStripMenuItem_Click);
+            // 
+            // резкость2ToolStripMenuItem
+            // 
+            this.резкость2ToolStripMenuItem.Name = "резкость2ToolStripMenuItem";
+            this.резкость2ToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.резкость2ToolStripMenuItem.Text = "Резкость2";
+            this.резкость2ToolStripMenuItem.Click += new System.EventHandler(this.sharpness2_ToolStripMenuItem_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.tableLayoutPanel1.SetColumnSpan(this.pictureBox1, 2);
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(582, 375);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar1.Location = new System.Drawing.Point(10, 385);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(10);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(412, 30);
+            this.progressBar1.TabIndex = 2;
+            // 
+            // cancel_button
+            // 
+            this.cancel_button.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancel_button.Location = new System.Drawing.Point(442, 385);
+            this.cancel_button.Margin = new System.Windows.Forms.Padding(10);
+            this.cancel_button.Name = "cancel_button";
+            this.cancel_button.Size = new System.Drawing.Size(130, 30);
+            this.cancel_button.TabIndex = 3;
+            this.cancel_button.Text = "Отмена";
+            this.cancel_button.UseVisualStyleBackColor = true;
+            this.cancel_button.Click += new System.EventHandler(this.cancel_button_Click);
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel1.Controls.Add(this.progressBar1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.cancel_button, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 28);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(582, 425);
+            this.tableLayoutPanel1.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(860, 481);
-            this.Controls.Add(this.cancel_button);
-            this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.pictureBox1);
+            this.ClientSize = new System.Drawing.Size(582, 453);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(600, 500);
             this.Name = "Form1";
             this.Text = "ComputerGraphics_Filters";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -300,6 +325,7 @@
         private System.Windows.Forms.ToolStripMenuItem резкость1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem операторСобеляToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem операторЩарраToolStripMenuItem;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
 
