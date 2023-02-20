@@ -144,5 +144,20 @@ namespace ComputerGraphics_Filters
         {
             backgroundWorker1.RunWorkerAsync(new GlassFilter());
         }
+
+        private void IncreaseBrightness_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new IncreaseBrightnessFilter());
+        }
+
+        private void GaussianBlur_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new GaussianFilter());
+        }
+
+        private void Embossing_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new EmbossingFilter());
+        }
     }
 }

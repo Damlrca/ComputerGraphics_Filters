@@ -147,9 +147,22 @@ namespace Filters
         }
     }
 
+    public class IncreaseBrightnessFilter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color sourceColor = sourceImage.GetPixel(x, y);
+            return Color.FromArgb(Clamp(sourceColor.R + 50, 0, 255), Clamp(sourceColor.G + 50, 0, 255), Clamp(sourceColor.B + 50, 0, 255));
+        }
+    }
+
     public class MatrixFilter : Filter
     {
         protected float[,] kernel = null;
+
+        protected float basicR = 0;
+        protected float basicG = 0;
+        protected float basicB = 0;
         protected MatrixFilter() { }
         public MatrixFilter(float[,] kernel)
         {
@@ -160,9 +173,10 @@ namespace Filters
             int radiusX = kernel.GetLength(0) / 2;
             int radiusY = kernel.GetLength(1) / 2;
 
-            float resultR = 0;
-            float resultG = 0;
-            float resultB = 0;
+            float resultR = basicR;
+            float resultG = basicG;
+            float resultB = basicB;
+
             for (int l = -radiusX; l <= radiusX; l++)
             {
                 for (int k = -radiusY; k <= radiusY; k++)
@@ -227,6 +241,43 @@ namespace Filters
                 { -1, -1, -1 },
                 { -1, 9, -1 },
                 { -1, -1, -1 } };
+        }
+    }
+
+    public class GaussianFilter : MatrixFilter
+    {
+        public GaussianFilter()
+        {
+            int radius = 3;
+            float sigma = 2;
+            int size = radius * 2 + 1;
+            kernel = new float[size, size];
+            float norm = 0;
+            for (int i=-radius; i<=radius; i++)
+            {
+                for(int j=-radius; j<=radius; j++)
+                {
+                    kernel[i + radius, j + radius] = (float)(Math.Exp(-(i * i + j * j) / (sigma * sigma)));
+                    norm += kernel[i + radius, j + radius];
+                }
+            }
+            for (int i = 0; i < size; i++)
+                for (int j = 0; j < size; j++)
+                    kernel[i, j] /= norm;
+        }
+    }
+
+    public class EmbossingFilter : MatrixFilter
+    {
+        public EmbossingFilter()
+        {
+            kernel = new float[3, 3] {
+                { 0, 1, 0 },          //направление освещения можно менять, но в сумме должен получаться 0
+                { 1, 0, -1 },
+                { 0, -1, 0 } };
+            basicR = 128;
+            basicG = 128;
+            basicB = 128;
         }
     }
 
