@@ -114,5 +114,30 @@ namespace ComputerGraphics_Filters
         {
             backgroundWorker1.RunWorkerAsync(new ScharrFilter());
         }
+
+        private void moving_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new MovingFilter());
+        }
+
+        private void turn_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new TurnFilter());
+        }
+
+        private void wave1_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new Wave1Filter());
+        }
+
+        private void wave2_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new Wave2Filter());
+        }
+
+        private void glass_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new GlassFilter());
+        }
     }
 }
