@@ -73,6 +73,79 @@ namespace Filters
                 Clamp(Intensity - k, 0, 255));
         }
     }
+    public class MovingFilter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            if (x + 50 < sourceImage.Width)
+            {
+                return sourceImage.GetPixel(x + 50, y);
+            }
+            else
+            {
+                return Color.FromArgb(0 , 0, 0);
+            }
+        }
+    }
+    public class TurnFilter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            int x0 = (int)sourceImage.Width / 2;
+            int y0 =(int)sourceImage.Height / 2;
+            //x0,y0 - центр поворота
+            double alpha = Math.Acos(-1) / (double)6;
+            int new_x =(int)((x-x0)*Math.Cos(alpha)) - (int)((y-y0)*Math.Sin(alpha)) + x0;
+            int new_y = (int)((x - x0) * Math.Sin(alpha)) + (int)((y - y0)*Math.Cos(alpha)) + y0;
+            if (new_x >=0 && new_x < sourceImage.Width && new_y >=0 && new_y < sourceImage.Height)
+            {
+                return sourceImage.GetPixel(new_x, new_y);
+            }
+            else
+            {
+                return Color.FromArgb(0, 0, 0);
+            }
+        }
+    }
+    public class Wave1Filter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+
+            double pi = Math.Acos(-1);
+            int new_x = x + (int)(20 * Math.Sin(2 * pi * x / (double)60));
+            int new_y = y;
+            new_x = Clamp(new_x, 0, sourceImage.Width - 1);
+            new_y = Clamp(new_y, 0, sourceImage.Height - 1);
+            return sourceImage.GetPixel(new_x, new_y);
+        }
+    }
+    public class Wave2Filter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+
+            double pi = Math.Acos(-1);
+            int new_x = x + (int)(20 * Math.Sin(2 * pi * y / (double)30));
+            int new_y = y;
+            new_x = Clamp(new_x, 0, sourceImage.Width - 1);
+            new_y = Clamp(new_y, 0, sourceImage.Height - 1);
+            return sourceImage.GetPixel(new_x, new_y);
+        }
+    }
+
+    public class GlassFilter : Filter
+    {
+        private Random random = new Random();
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            int new_x = x + (int)((random.NextDouble() - 0.5) * 10);
+            int new_y = y + (int)((random.NextDouble() - 0.5) * 10);
+            new_x = Clamp(new_x, 0, sourceImage.Width - 1);
+            new_y = Clamp(new_y, 0, sourceImage.Height - 1);
+            return sourceImage.GetPixel(new_x, new_y);
+        }
+    }
 
     public class MatrixFilter : Filter
     {
@@ -249,3 +322,5 @@ namespace Filters
         }
     }
 }
+
+//Ничего не поменял, просто тестирую git
