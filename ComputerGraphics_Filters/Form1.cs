@@ -22,19 +22,24 @@ namespace ComputerGraphics_Filters
 
         private void Open_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Image files | *.png; *.jpg; *.bmp; | All files(*.*) | *.*";
-
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                image = new Bitmap(dialog.FileName);
+                image = new Bitmap(openFileDialog1.FileName);
             }
 
             pictureBox1.Image = image;
             pictureBox1.Refresh();
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private void Save_as_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                image.Save(saveFileDialog1.FileName);
+            }
+        }
+
+        private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             //Bitmap resultImage = ((Filter)e.Argument).processImage(image, backgroundWorker1);
             Bitmap resultImage = ((Filter)e.Argument).processImage(new Bitmap(image), backgroundWorker1);
@@ -45,12 +50,12 @@ namespace ComputerGraphics_Filters
             }
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void BackgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (!e.Cancelled)
             {
@@ -60,7 +65,7 @@ namespace ComputerGraphics_Filters
             progressBar1.Value = 0;
         }
 
-        private void cancel_button_Click(object sender, EventArgs e)
+        private void Cancel_button_Click(object sender, EventArgs e)
         {
             backgroundWorker1.CancelAsync();
         }
@@ -70,27 +75,27 @@ namespace ComputerGraphics_Filters
             backgroundWorker1.RunWorkerAsync(new InvertFilter());
         }
 
-        private void blur_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Blur_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new BlurFilter());
         }
 
-        private void motionBlur_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MotionBlur_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new MotionBlurFilter());
         }
 
-        private void sharpness1_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Sharpness1_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new Sharpness1Filter());
         }
 
-        private void sharpness2_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Sharpness2_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new Sharpness2Filter());
         }
 
-        private void grayScale_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GrayScale_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new GrayScaleFilter());
         }
@@ -100,42 +105,42 @@ namespace ComputerGraphics_Filters
             backgroundWorker1.RunWorkerAsync(new SepiaFilter());
         }
 
-        private void prewitt_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Prewitt_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new PrewittFilter());
         }
 
-        private void sobel_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Sobel_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new SobelFilter());
         }
 
-        private void scharr_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Scharr_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new ScharrFilter());
         }
 
-        private void moving_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Moving_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new MovingFilter());
         }
 
-        private void turn_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Turn_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new TurnFilter());
         }
 
-        private void wave1_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Wave1_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new Wave1Filter());
         }
 
-        private void wave2_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Wave2_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new Wave2Filter());
         }
 
-        private void glass_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Glass_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new GlassFilter());
         }
