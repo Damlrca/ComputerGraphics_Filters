@@ -159,5 +159,10 @@ namespace ComputerGraphics_Filters
         {
             backgroundWorker1.RunWorkerAsync(new EmbossingFilter());
         }
+
+        private void Median_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new MedianFilter());
+        }
     }
 }

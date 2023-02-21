@@ -147,6 +147,37 @@ namespace Filters
         }
     }
 
+    public class MedianFilter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            List<int> all_r = new List<int>();
+            List<int> all_g = new List<int>();
+            List<int> all_b = new List<int>();
+            int radiusX = 2;
+            int radiusY = 2;
+            for(int i = -radiusX; i <= radiusX; i++)
+            {
+                for(int j = -radiusY;j<= radiusY; j++)
+                {
+                    int xx = x + i;
+                    int yy = y + j;
+                    if(xx >=0 && xx < sourceImage.Width && yy >=0 && yy < sourceImage.Height)
+                    {
+                        Color color = sourceImage.GetPixel(xx, yy);
+                        all_r.Add(color.R);
+                        all_g.Add(color.G);
+                        all_b.Add(color.B);
+                    }
+                }
+            }
+            all_r.Sort();
+            all_g.Sort();
+            all_b.Sort();
+            return Color.FromArgb(all_r[all_r.Count() / 2], all_g[all_g.Count() / 2], all_b[all_b.Count() / 2]);
+        }
+    }
+
     public class IncreaseBrightnessFilter : Filter
     {
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
@@ -210,6 +241,7 @@ namespace Filters
                     kernel[i, j] = 1.0f / (sizeX * sizeY);
         }
     }
+    
 
     public class MotionBlurFilter : MatrixFilter
     {
@@ -373,4 +405,3 @@ namespace Filters
         }
     }
 }
-//новая ветка
