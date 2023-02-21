@@ -146,6 +146,88 @@ namespace Filters
             return sourceImage.GetPixel(new_x, new_y);
         }
     }
+    
+
+    public class MedianFilter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            List<int> all_r = new List<int>();
+            List<int> all_g = new List<int>();
+            List<int> all_b = new List<int>();
+            int radiusX = 2;
+            int radiusY = 2;
+            for(int i = -radiusX; i <= radiusX; i++)
+            {
+                for(int j = -radiusY;j<= radiusY; j++)
+                {
+                    int xx = x + i;
+                    int yy = y + j;
+                    if(xx >=0 && xx < sourceImage.Width && yy >=0 && yy < sourceImage.Height)
+                    {
+                        Color color = sourceImage.GetPixel(xx, yy);
+                        all_r.Add(color.R);
+                        all_g.Add(color.G);
+                        all_b.Add(color.B);
+                    }
+                }
+            }
+            all_r.Sort();
+            all_g.Sort();
+            all_b.Sort();
+            return Color.FromArgb(all_r[all_r.Count() / 2], all_g[all_g.Count() / 2], all_b[all_b.Count() / 2]);
+        }
+    }
+
+    public class MaximalFilter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            int max_r = 0;int max_g = 0; int max_b = 0;
+            int radiusX = 2;int radiusY = 2;
+            for (int i = -radiusX; i <= radiusX; i++)
+            {
+                for (int j = -radiusY; j <= radiusY; j++)
+                {
+                    int xx = x + i;
+                    int yy = y + j;
+                    if (xx >= 0 && xx < sourceImage.Width && yy >= 0 && yy < sourceImage.Height)
+                    {
+                        Color color = sourceImage.GetPixel(xx, yy);
+                        max_r = Math.Max(max_r, color.R);
+                        max_g = Math.Max(max_g, color.G);
+                        max_b = Math.Max(max_b, color.B);
+                    }
+                }
+            }
+            return Color.FromArgb(max_r, max_g, max_b);
+        }
+    }
+
+    public class MinimalFilter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            int min_r = 255; int min_g = 255; int min_b = 255;
+            int radiusX = 2; int radiusY = 2;
+            for (int i = -radiusX; i <= radiusX; i++)
+            {
+                for (int j = -radiusY; j <= radiusY; j++)
+                {
+                    int xx = x + i;
+                    int yy = y + j;
+                    if (xx >= 0 && xx < sourceImage.Width && yy >= 0 && yy < sourceImage.Height)
+                    {
+                        Color color = sourceImage.GetPixel(xx, yy);
+                        min_r = Math.Min(min_r, color.R);
+                        min_g = Math.Min(min_g, color.G);
+                        min_b = Math.Min(min_b, color.B);
+                    }
+                }
+            }
+            return Color.FromArgb(min_r, min_g, min_b);
+        }
+    }
 
     public class IncreaseBrightnessFilter : Filter
     {
@@ -210,6 +292,7 @@ namespace Filters
                     kernel[i, j] = 1.0f / (sizeX * sizeY);
         }
     }
+    
 
     public class MotionBlurFilter : MatrixFilter
     {
@@ -372,7 +455,7 @@ namespace Filters
                 { -3, -10, -3 }};
         }
     }
-
+    
     public class GlobalFilter : Filter
     {
 
@@ -427,5 +510,4 @@ namespace Filters
                                   Clamp((int)(brightness + (float)(sourceColor.B - brightness) * c), 0, 255));
         }
     }
-
 }

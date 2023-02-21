@@ -160,6 +160,21 @@ namespace ComputerGraphics_Filters
             backgroundWorker1.RunWorkerAsync(new EmbossingFilter());
         }
 
+        private void Median_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new MedianFilter());
+        }
+
+        private void Maximal_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new MaximalFilter());
+        }
+
+        private void Minimal_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new MinimalFilter());
+        }
+        
         private void IncreaseContrast_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new ContrastFilter());

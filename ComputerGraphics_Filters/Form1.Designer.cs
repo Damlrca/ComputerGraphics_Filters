@@ -57,6 +57,10 @@
             this.волны1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.волны2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.стеклоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.нелинейныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.медианныйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.максимальныйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.минимальныйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -112,6 +116,7 @@
             this.точечныеToolStripMenuItem,
             this.матричныеToolStripMenuItem,
             this.геометрическиеToolStripMenuItem,
+            this.нелинейныеToolStripMenuItem,
             this.глобальныеToolStripMenuItem});
             this.фильтрыToolStripMenuItem.Name = "фильтрыToolStripMenuItem";
             this.фильтрыToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
@@ -306,6 +311,37 @@
             this.стеклоToolStripMenuItem.Text = "Стекло";
             this.стеклоToolStripMenuItem.Click += new System.EventHandler(this.Glass_ToolStripMenuItem_Click);
             // 
+            // нелинейныеToolStripMenuItem
+            // 
+            this.нелинейныеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.медианныйToolStripMenuItem,
+            this.максимальныйToolStripMenuItem,
+            this.минимальныйToolStripMenuItem});
+            this.нелинейныеToolStripMenuItem.Name = "нелинейныеToolStripMenuItem";
+            this.нелинейныеToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.нелинейныеToolStripMenuItem.Text = "Нелинейные";
+            // 
+            // медианныйToolStripMenuItem
+            // 
+            this.медианныйToolStripMenuItem.Name = "медианныйToolStripMenuItem";
+            this.медианныйToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.медианныйToolStripMenuItem.Text = "Медианный";
+            this.медианныйToolStripMenuItem.Click += new System.EventHandler(this.Median_ToolStripMenuItem_Click);
+            // 
+            // максимальныйToolStripMenuItem
+            // 
+            this.максимальныйToolStripMenuItem.Name = "максимальныйToolStripMenuItem";
+            this.максимальныйToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.максимальныйToolStripMenuItem.Text = "Максимальный";
+            this.максимальныйToolStripMenuItem.Click += new System.EventHandler(this.Maximal_ToolStripMenuItem_Click);
+            // 
+            // минимальныйToolStripMenuItem
+            // 
+            this.минимальныйToolStripMenuItem.Name = "минимальныйToolStripMenuItem";
+            this.минимальныйToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.минимальныйToolStripMenuItem.Text = "Минимальный";
+            this.минимальныйToolStripMenuItem.Click += new System.EventHandler(this.Minimal_ToolStripMenuItem_Click);
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.Filter = "Image files | *.png; *.jpg; *.bmp; | All files(*.*) | *.*";
@@ -451,6 +487,10 @@
         private System.Windows.Forms.ToolStripMenuItem увеличитьЯркостьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem тиснениеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem размытиеПоГауссуToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem нелинейныеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem медианныйToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem максимальныйToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem минимальныйToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem глобальныеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem повыситьКонтрастностьToolStripMenuItem;
     }
