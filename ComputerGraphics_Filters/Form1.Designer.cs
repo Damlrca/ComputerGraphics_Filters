@@ -68,6 +68,8 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.глобальныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.повыситьКонтрастностьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -114,7 +116,8 @@
             this.точечныеToolStripMenuItem,
             this.матричныеToolStripMenuItem,
             this.геометрическиеToolStripMenuItem,
-            this.нелинейныеToolStripMenuItem});
+            this.нелинейныеToolStripMenuItem,
+            this.глобальныеToolStripMenuItem});
             this.фильтрыToolStripMenuItem.Name = "фильтрыToolStripMenuItem";
             this.фильтрыToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
             this.фильтрыToolStripMenuItem.Text = "Фильтры";
@@ -411,6 +414,21 @@
             this.saveFileDialog1.FileName = "filename.png";
             this.saveFileDialog1.Filter = "Image files | *.png; *.jpg; *.bmp; | All files(*.*) | *.*";
             // 
+            // глобальныеToolStripMenuItem
+            // 
+            this.глобальныеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.повыситьКонтрастностьToolStripMenuItem});
+            this.глобальныеToolStripMenuItem.Name = "глобальныеToolStripMenuItem";
+            this.глобальныеToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.глобальныеToolStripMenuItem.Text = "Глобальные";
+            // 
+            // повыситьКонтрастностьToolStripMenuItem
+            // 
+            this.повыситьКонтрастностьToolStripMenuItem.Name = "повыситьКонтрастностьToolStripMenuItem";
+            this.повыситьКонтрастностьToolStripMenuItem.Size = new System.Drawing.Size(265, 26);
+            this.повыситьКонтрастностьToolStripMenuItem.Text = "Повысить контрастность";
+            this.повыситьКонтрастностьToolStripMenuItem.Click += new System.EventHandler(this.IncreaseContrast_ToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -473,6 +491,8 @@
         private System.Windows.Forms.ToolStripMenuItem медианныйToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem максимальныйToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem минимальныйToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem глобальныеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem повыситьКонтрастностьToolStripMenuItem;
     }
 }
 

@@ -83,7 +83,7 @@ namespace Filters
             }
             else
             {
-                return Color.FromArgb(0 , 0, 0);
+                return Color.FromArgb(0, 0, 0);
             }
         }
     }
@@ -92,12 +92,12 @@ namespace Filters
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             int x0 = (int)sourceImage.Width / 2;
-            int y0 =(int)sourceImage.Height / 2;
+            int y0 = (int)sourceImage.Height / 2;
             //x0,y0 - центр поворота
             double alpha = Math.Acos(-1) / (double)6;
-            int new_x =(int)((x-x0)*Math.Cos(alpha)) - (int)((y-y0)*Math.Sin(alpha)) + x0;
-            int new_y = (int)((x - x0) * Math.Sin(alpha)) + (int)((y - y0)*Math.Cos(alpha)) + y0;
-            if (new_x >=0 && new_x < sourceImage.Width && new_y >=0 && new_y < sourceImage.Height)
+            int new_x = (int)((x - x0) * Math.Cos(alpha)) - (int)((y - y0) * Math.Sin(alpha)) + x0;
+            int new_y = (int)((x - x0) * Math.Sin(alpha)) + (int)((y - y0) * Math.Cos(alpha)) + y0;
+            if (new_x >= 0 && new_x < sourceImage.Width && new_y >= 0 && new_y < sourceImage.Height)
             {
                 return sourceImage.GetPixel(new_x, new_y);
             }
@@ -336,9 +336,9 @@ namespace Filters
             int size = radius * 2 + 1;
             kernel = new float[size, size];
             float norm = 0;
-            for (int i=-radius; i<=radius; i++)
+            for (int i = -radius; i <= radius; i++)
             {
-                for(int j=-radius; j<=radius; j++)
+                for (int j = -radius; j <= radius; j++)
                 {
                     kernel[i + radius, j + radius] = (float)(Math.Exp(-(i * i + j * j) / (sigma * sigma)));
                     norm += kernel[i + radius, j + radius];
@@ -453,6 +453,61 @@ namespace Filters
                 { 3, 10, 3 },
                 { 0, 0, 0 },
                 { -3, -10, -3 }};
+        }
+    }
+    
+    public class GlobalFilter : Filter
+    {
+
+        protected float basicR = 0;
+        protected float basicG = 0;
+        protected float basicB = 0;
+
+        protected long brightness = 0;
+        protected GlobalFilter() { }
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y) { return Color.FromArgb(0, 0, 0); }
+
+        public Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
+        {
+            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    long pix = 0;
+                    pix += sourceImage.GetPixel(i, j).R;
+                    pix += sourceImage.GetPixel(i, j).G;
+                    pix += sourceImage.GetPixel(i, j).B;
+                    pix /= 3;
+                    brightness += pix;
+                }
+            }
+            brightness /= (long)(sourceImage.Width * sourceImage.Height);
+
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                worker.ReportProgress((int)((float)i / resultImage.Width * 100));
+                if (worker.CancellationPending)
+                    return null;
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    resultImage.SetPixel(i, j, calculateNewPixelColor(sourceImage, i, j));
+                }
+            }
+
+            return resultImage;
+        }
+    }
+    public class ContrastFilter : GlobalFilter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            float c = 1.2f;
+            Color sourceColor = sourceImage.GetPixel(x, y);
+            return Color.FromArgb(Clamp((int)(brightness + (float)(sourceColor.R - brightness) * c), 0, 255),
+                                  Clamp((int)(brightness + (float)(sourceColor.G - brightness) * c), 0, 255),
+                                  Clamp((int)(brightness + (float)(sourceColor.B - brightness) * c), 0, 255));
         }
     }
 }
