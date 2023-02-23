@@ -70,10 +70,73 @@ namespace ComputerGraphics_Filters
             backgroundWorker1.CancelAsync();
         }
 
+        // Точечные фильтры
+
         private void Inverse_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new InvertFilter());
         }
+
+        private void GrayScale_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new GrayScaleFilter());
+        }
+
+        private void Sepia_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new SepiaFilter());
+        }
+
+        private void IncreaseBrightness_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new IncreaseBrightnessFilter());
+        }
+
+        // Геометрический фильтры
+
+        private void Move_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new MoveFilter());
+        }
+
+        private void Rotate_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new RotateFilter());
+        }
+
+        private void Waves1_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new Waves1Filter());
+        }
+
+        private void Waves2_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new Waves2Filter());
+        }
+
+        private void Glass_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new GlassFilter());
+        }
+
+        // Нелинейные фильтры
+
+        private void Median_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new MedianFilter());
+        }
+
+        private void Maximum_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new MaximumFilter());
+        }
+
+        private void Minimum_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new MinimumFilter());
+        }
+
+        // Матричные фильтры
 
         private void Blur_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -83,6 +146,11 @@ namespace ComputerGraphics_Filters
         private void MotionBlur_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new MotionBlurFilter());
+        }
+
+        private void GaussianBlur_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new GaussianFilter());
         }
 
         private void Sharpness1_ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -95,15 +163,12 @@ namespace ComputerGraphics_Filters
             backgroundWorker1.RunWorkerAsync(new Sharpness2Filter());
         }
 
-        private void GrayScale_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Embossing_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            backgroundWorker1.RunWorkerAsync(new GrayScaleFilter());
+            backgroundWorker1.RunWorkerAsync(new EmbossingFilter());
         }
 
-        private void Sepia_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            backgroundWorker1.RunWorkerAsync(new SepiaFilter());
-        }
+        // Фильтры выделения границы
 
         private void Prewitt_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -120,60 +185,7 @@ namespace ComputerGraphics_Filters
             backgroundWorker1.RunWorkerAsync(new ScharrFilter());
         }
 
-        private void Moving_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            backgroundWorker1.RunWorkerAsync(new MovingFilter());
-        }
-
-        private void Turn_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            backgroundWorker1.RunWorkerAsync(new TurnFilter());
-        }
-
-        private void Wave1_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            backgroundWorker1.RunWorkerAsync(new Wave1Filter());
-        }
-
-        private void Wave2_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            backgroundWorker1.RunWorkerAsync(new Wave2Filter());
-        }
-
-        private void Glass_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            backgroundWorker1.RunWorkerAsync(new GlassFilter());
-        }
-
-        private void IncreaseBrightness_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            backgroundWorker1.RunWorkerAsync(new IncreaseBrightnessFilter());
-        }
-
-        private void GaussianBlur_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            backgroundWorker1.RunWorkerAsync(new GaussianFilter());
-        }
-
-        private void Embossing_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            backgroundWorker1.RunWorkerAsync(new EmbossingFilter());
-        }
-
-        private void Median_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            backgroundWorker1.RunWorkerAsync(new MedianFilter());
-        }
-
-        private void Maximal_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            backgroundWorker1.RunWorkerAsync(new MaximalFilter());
-        }
-
-        private void Minimal_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            backgroundWorker1.RunWorkerAsync(new MinimalFilter());
-        }
+        // Глобальные фильтры
         
         private void IncreaseContrast_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
