@@ -251,5 +251,17 @@ namespace ComputerGraphics_Filters
         {
             backgroundWorker1.RunWorkerAsync(new gbRGBFilter());
         }
+
+        // Дизеринг
+
+        private void Quantization_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new QuantizationFilter());
+        }
+
+        private void FloydSteinbergDithering_ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new FloydSteinbergDitheringFilter());
+        }
     }
 }
