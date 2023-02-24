@@ -248,17 +248,16 @@ namespace Filters
 
     // Глобальные фильтры
 
-    public class ContrastFilter : Filter
+    public abstract class GlobalFilter : Filter
     {
-        protected long brightness = 0;
-
-        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
+        public int GetBrightness(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100)
         {
-            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
-
+            long brightness = 0;
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / resultImage.Width * 50));
+                worker.ReportProgress((int)((float)i / sourceImage.Width * MaxPercent));
+                if (worker.CancellationPending)
+                    return 0;
                 for (int j = 0; j < sourceImage.Height; j++)
                 {
                     long pix = 0;
@@ -271,6 +270,55 @@ namespace Filters
                 }
             }
             brightness /= sourceImage.Width * sourceImage.Height;
+            return (int)brightness;
+        }
+
+        public void GetMax(Bitmap sourceImage, out int R, out int G, out int B, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
+        {
+            R = G = B = 0;
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                worker.ReportProgress((int)((float)i / sourceImage.Width * MaxPercent) + add);
+                if (worker.CancellationPending)
+                    return;
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    Color color = sourceImage.GetPixel(i, j);
+                    R = Math.Max(R, color.R);
+                    G = Math.Max(G, color.G);
+                    B = Math.Max(B, color.B);
+                }
+            }
+        }
+
+        public void GetMin(Bitmap sourceImage, out int R, out int G, out int B, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
+        {
+            R = G = B = 0;
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                worker.ReportProgress((int)((float)i / sourceImage.Width * MaxPercent) + add);
+                if (worker.CancellationPending)
+                    return;
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    Color color = sourceImage.GetPixel(i, j);
+                    R = Math.Min(R, color.R);
+                    G = Math.Min(G, color.G);
+                    B = Math.Min(B, color.B);
+                }
+            }
+        }
+    }
+
+    public class ContrastFilter : GlobalFilter
+    {
+        protected int brightness = 0;
+
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
+        {
+            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+
+            brightness = GetBrightness(sourceImage, worker, 50);
 
             for (int i = 0; i < sourceImage.Width; i++)
             {
@@ -296,34 +344,22 @@ namespace Filters
         }
     }
 
-    public class AutolevelsFilter : Filter
+    public class AutolevelsFilter : GlobalFilter
     {
-        int minR = 255, maxR = 0;
-        int minG = 255, maxG = 0;
-        int minB = 255, maxB = 0;
+        int minR, maxR;
+        int minG, maxG;
+        int minB, maxB;
 
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
 
-            for (int i = 0; i < sourceImage.Width; i++)
-            {
-                worker.ReportProgress((int)((float)i / resultImage.Width * 50));
-                for (int j = 0; j < sourceImage.Height; j++)
-                {
-                    Color color = sourceImage.GetPixel(i, j);
-                    minR = Math.Min(minR, color.R);
-                    maxR = Math.Max(maxR, color.R);
-                    minG = Math.Min(minG, color.G);
-                    maxG = Math.Max(maxG, color.G);
-                    minB = Math.Min(minB, color.B);
-                    maxB = Math.Max(maxB, color.B);
-                }
-            }
+            GetMax(sourceImage, out maxR, out maxG, out maxB, worker, 33, 0);
+            GetMin(sourceImage, out minR, out minG, out minB, worker, 33, 33);
 
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / resultImage.Width * 50) + 50);
+                worker.ReportProgress((int)((float)i / resultImage.Width * (100 - 33 - 33)) + (33 + 33));
                 if (worker.CancellationPending)
                     return null;
                 for (int j = 0; j < sourceImage.Height; j++)
