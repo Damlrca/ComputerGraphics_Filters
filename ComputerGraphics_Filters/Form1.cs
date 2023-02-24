@@ -236,5 +236,20 @@ namespace ComputerGraphics_Filters
         {
             backgroundWorker1.RunWorkerAsync(new bRGBFilter());
         }
+
+        private void rgRGB_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new rgRGBFilter());
+        }
+
+        private void rbRGB_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new rbRGBFilter());
+        }
+
+        private void gbRGB_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new gbRGBFilter());
+        }
     }
 }

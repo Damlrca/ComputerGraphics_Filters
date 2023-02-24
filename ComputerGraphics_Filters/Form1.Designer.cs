@@ -32,6 +32,9 @@
             this.file_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.open_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAs_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.edit_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.undo_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.repeat_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filters_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dot_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.invert_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,6 +66,7 @@
             this.minimum_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.global_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contrast_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autolevels_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.noises_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saltAndPepper_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -72,14 +76,14 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.autolevels_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.channels_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RGB_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rRGB_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gRGB_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bRGB_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.edit_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.undo_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.repeat_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rgRGB_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rbRGB_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gbRGB_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -91,7 +95,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.file_ToolStripMenuItem,
             this.edit_ToolStripMenuItem,
-            this.filters_ToolStripMenuItem});
+            this.filters_ToolStripMenuItem,
+            this.channels_ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(582, 28);
@@ -110,16 +115,43 @@
             // open_ToolStripMenuItem
             // 
             this.open_ToolStripMenuItem.Name = "open_ToolStripMenuItem";
-            this.open_ToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
+            this.open_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.open_ToolStripMenuItem.Size = new System.Drawing.Size(251, 26);
             this.open_ToolStripMenuItem.Text = "Открыть";
             this.open_ToolStripMenuItem.Click += new System.EventHandler(this.Open_ToolStripMenuItem_Click);
             // 
             // saveAs_ToolStripMenuItem
             // 
             this.saveAs_ToolStripMenuItem.Name = "saveAs_ToolStripMenuItem";
-            this.saveAs_ToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
+            this.saveAs_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveAs_ToolStripMenuItem.Size = new System.Drawing.Size(251, 26);
             this.saveAs_ToolStripMenuItem.Text = "Сохранить как...";
             this.saveAs_ToolStripMenuItem.Click += new System.EventHandler(this.Save_as_ToolStripMenuItem_Click);
+            // 
+            // edit_ToolStripMenuItem
+            // 
+            this.edit_ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.undo_ToolStripMenuItem,
+            this.repeat_ToolStripMenuItem});
+            this.edit_ToolStripMenuItem.Name = "edit_ToolStripMenuItem";
+            this.edit_ToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
+            this.edit_ToolStripMenuItem.Text = "Правка";
+            // 
+            // undo_ToolStripMenuItem
+            // 
+            this.undo_ToolStripMenuItem.Name = "undo_ToolStripMenuItem";
+            this.undo_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.undo_ToolStripMenuItem.Size = new System.Drawing.Size(352, 26);
+            this.undo_ToolStripMenuItem.Text = "Отменить";
+            this.undo_ToolStripMenuItem.Click += new System.EventHandler(this.undo_ToolStripMenuItem_Click);
+            // 
+            // repeat_ToolStripMenuItem
+            // 
+            this.repeat_ToolStripMenuItem.Name = "repeat_ToolStripMenuItem";
+            this.repeat_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.repeat_ToolStripMenuItem.Size = new System.Drawing.Size(352, 26);
+            this.repeat_ToolStripMenuItem.Text = "Повторить последний фильтр";
+            this.repeat_ToolStripMenuItem.Click += new System.EventHandler(this.repeat_ToolStripMenuItem_Click);
             // 
             // filters_ToolStripMenuItem
             // 
@@ -129,8 +161,7 @@
             this.geometric_ToolStripMenuItem,
             this.nonLinear_ToolStripMenuItem,
             this.global_ToolStripMenuItem,
-            this.noises_ToolStripMenuItem,
-            this.channels_ToolStripMenuItem});
+            this.noises_ToolStripMenuItem});
             this.filters_ToolStripMenuItem.Name = "filters_ToolStripMenuItem";
             this.filters_ToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
             this.filters_ToolStripMenuItem.Text = "Фильтры";
@@ -371,6 +402,13 @@
             this.contrast_ToolStripMenuItem.Text = "Повысить контрастность";
             this.contrast_ToolStripMenuItem.Click += new System.EventHandler(this.IncreaseContrast_ToolStripMenuItem_Click);
             // 
+            // autolevels_ToolStripMenuItem
+            // 
+            this.autolevels_ToolStripMenuItem.Name = "autolevels_ToolStripMenuItem";
+            this.autolevels_ToolStripMenuItem.Size = new System.Drawing.Size(347, 26);
+            this.autolevels_ToolStripMenuItem.Text = "Линейное растяжение гистограммы";
+            this.autolevels_ToolStripMenuItem.Click += new System.EventHandler(this.autolevels_ToolStripMenuItem_Click);
+            // 
             // noises_ToolStripMenuItem
             // 
             this.noises_ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -458,66 +496,68 @@
             this.saveFileDialog1.FileName = "filename.png";
             this.saveFileDialog1.Filter = "Image files | *.png; *.jpg; *.bmp; | All files(*.*) | *.*";
             // 
-            // autolevels_ToolStripMenuItem
-            // 
-            this.autolevels_ToolStripMenuItem.Name = "autolevels_ToolStripMenuItem";
-            this.autolevels_ToolStripMenuItem.Size = new System.Drawing.Size(347, 26);
-            this.autolevels_ToolStripMenuItem.Text = "Линейное растяжение гистограммы";
-            this.autolevels_ToolStripMenuItem.Click += new System.EventHandler(this.autolevels_ToolStripMenuItem_Click);
-            // 
             // channels_ToolStripMenuItem
             // 
             this.channels_ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RGB_ToolStripMenuItem});
+            this.channels_ToolStripMenuItem.Name = "channels_ToolStripMenuItem";
+            this.channels_ToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+            this.channels_ToolStripMenuItem.Text = "Каналы";
+            // 
+            // RGB_ToolStripMenuItem
+            // 
+            this.RGB_ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rRGB_ToolStripMenuItem,
             this.gRGB_ToolStripMenuItem,
-            this.bRGB_ToolStripMenuItem});
-            this.channels_ToolStripMenuItem.Name = "channels_ToolStripMenuItem";
-            this.channels_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.channels_ToolStripMenuItem.Text = "Каналы";
+            this.bRGB_ToolStripMenuItem,
+            this.rgRGB_ToolStripMenuItem,
+            this.rbRGB_ToolStripMenuItem,
+            this.gbRGB_ToolStripMenuItem});
+            this.RGB_ToolStripMenuItem.Name = "RGB_ToolStripMenuItem";
+            this.RGB_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.RGB_ToolStripMenuItem.Text = "RGB";
             // 
             // rRGB_ToolStripMenuItem
             // 
             this.rRGB_ToolStripMenuItem.Name = "rRGB_ToolStripMenuItem";
             this.rRGB_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.rRGB_ToolStripMenuItem.Text = "R (RGB)";
+            this.rRGB_ToolStripMenuItem.Text = "R";
             this.rRGB_ToolStripMenuItem.Click += new System.EventHandler(this.rRGB_ToolStripMenuItem_Click);
             // 
             // gRGB_ToolStripMenuItem
             // 
             this.gRGB_ToolStripMenuItem.Name = "gRGB_ToolStripMenuItem";
             this.gRGB_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.gRGB_ToolStripMenuItem.Text = "G (RGB)";
+            this.gRGB_ToolStripMenuItem.Text = "G";
             this.gRGB_ToolStripMenuItem.Click += new System.EventHandler(this.gRGB_ToolStripMenuItem_Click);
             // 
             // bRGB_ToolStripMenuItem
             // 
             this.bRGB_ToolStripMenuItem.Name = "bRGB_ToolStripMenuItem";
             this.bRGB_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.bRGB_ToolStripMenuItem.Text = "B (RGB)";
+            this.bRGB_ToolStripMenuItem.Text = "B";
             this.bRGB_ToolStripMenuItem.Click += new System.EventHandler(this.bRGB_ToolStripMenuItem_Click);
             // 
-            // edit_ToolStripMenuItem
+            // rgRGB_ToolStripMenuItem
             // 
-            this.edit_ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.undo_ToolStripMenuItem,
-            this.repeat_ToolStripMenuItem});
-            this.edit_ToolStripMenuItem.Name = "edit_ToolStripMenuItem";
-            this.edit_ToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
-            this.edit_ToolStripMenuItem.Text = "Правка";
+            this.rgRGB_ToolStripMenuItem.Name = "rgRGB_ToolStripMenuItem";
+            this.rgRGB_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.rgRGB_ToolStripMenuItem.Text = "RG";
+            this.rgRGB_ToolStripMenuItem.Click += new System.EventHandler(this.rgRGB_ToolStripMenuItem_Click);
             // 
-            // undo_ToolStripMenuItem
+            // rbRGB_ToolStripMenuItem
             // 
-            this.undo_ToolStripMenuItem.Name = "undo_ToolStripMenuItem";
-            this.undo_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.undo_ToolStripMenuItem.Text = "Отменить";
-            this.undo_ToolStripMenuItem.Click += new System.EventHandler(this.undo_ToolStripMenuItem_Click);
+            this.rbRGB_ToolStripMenuItem.Name = "rbRGB_ToolStripMenuItem";
+            this.rbRGB_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.rbRGB_ToolStripMenuItem.Text = "RB";
+            this.rbRGB_ToolStripMenuItem.Click += new System.EventHandler(this.rbRGB_ToolStripMenuItem_Click);
             // 
-            // repeat_ToolStripMenuItem
+            // gbRGB_ToolStripMenuItem
             // 
-            this.repeat_ToolStripMenuItem.Name = "repeat_ToolStripMenuItem";
-            this.repeat_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.repeat_ToolStripMenuItem.Text = "Повторить";
-            this.repeat_ToolStripMenuItem.Click += new System.EventHandler(this.repeat_ToolStripMenuItem_Click);
+            this.gbRGB_ToolStripMenuItem.Name = "gbRGB_ToolStripMenuItem";
+            this.gbRGB_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.gbRGB_ToolStripMenuItem.Text = "GB";
+            this.gbRGB_ToolStripMenuItem.Click += new System.EventHandler(this.gbRGB_ToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -586,13 +626,17 @@
         private System.Windows.Forms.ToolStripMenuItem noises_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saltAndPepper_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem autolevels_ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem channels_ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rRGB_ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gRGB_ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bRGB_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem edit_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem undo_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem repeat_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem channels_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RGB_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rRGB_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gRGB_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bRGB_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rgRGB_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rbRGB_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gbRGB_ToolStripMenuItem;
     }
 }
 

@@ -363,33 +363,4 @@ namespace Filters
                 return sourceImage.GetPixel(x, y);
         }
     }
-
-    // Каналы
-
-    public class rRGBFilter : Filter
-    {
-        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
-        {
-            int r = sourceImage.GetPixel(x, y).R;
-            return Color.FromArgb(r, r, r);
-        }
-    }
-
-    public class gRGBFilter : Filter
-    {
-        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
-        {
-            int g = sourceImage.GetPixel(x, y).G;
-            return Color.FromArgb(g, g, g);
-        }
-    }
-
-    public class bRGBFilter : Filter
-    {
-        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
-        {
-            int b = sourceImage.GetPixel(x, y).B;
-            return Color.FromArgb(b, b, b);
-        }
-    }
 }

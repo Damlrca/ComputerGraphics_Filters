@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Filters.cs" />
+    <Compile Include="Filters_Channels.cs" />
     <Compile Include="Filters_Matrix.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
