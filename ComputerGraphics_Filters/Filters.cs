@@ -308,6 +308,32 @@ namespace Filters
                 }
             }
         }
+
+        public void GetAvarageColors(Bitmap sourceImage, out int R, out int G, out int B, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
+        {
+            //Даёт среднюю яркость по каждому каналу
+            R = G = B = 0;
+            long tR = 0; long tG = 0; long tB = 0;
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                worker.ReportProgress((int)((float)i / sourceImage.Width * MaxPercent) + add);
+                if (worker.CancellationPending)
+                    return;
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    Color color = sourceImage.GetPixel(i, j);
+                    tR += color.R;
+                    tG += color.G;
+                    tB += color.B;
+                }
+            }
+            R = (int)tR / (sourceImage.Width * sourceImage.Height);
+            G = (int)tG / (sourceImage.Width * sourceImage.Height);
+            B = (int)tB / (sourceImage.Width * sourceImage.Height);
+
+        }
+
+
     }
 
     public class ContrastFilter : GlobalFilter
@@ -377,6 +403,77 @@ namespace Filters
             return Color.FromArgb(minR == maxR ? minR : (int)((sourceColor.R - minR) * 255.0 / (maxR - minR)),
                                   minG == maxG ? minG : (int)((sourceColor.G - minG) * 255.0 / (maxG - minG)),
                                   minB == maxB ? minB : (int)((sourceColor.B - minB) * 255.0 / (maxB - minB)));
+        }
+    }
+
+    public class GrayWorldFilter : GlobalFilter
+    {
+        int Avg;
+        int AvgR;
+        int AvgG;
+        int AvgB;
+
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
+        {
+            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+
+            GetAvarageColors(sourceImage, out AvgR, out AvgG, out AvgB, worker, 50, 0);
+            Avg = (int)(AvgR + AvgG + AvgB) / 3;
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                worker.ReportProgress((int)((float)i / resultImage.Width * 50) + 50);
+                if (worker.CancellationPending)
+                    return null;
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    resultImage.SetPixel(i, j, calculateNewPixelColor(sourceImage, i, j));
+                }
+            }
+
+            return resultImage;
+        }
+
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color sourceColor = sourceImage.GetPixel(x, y);
+            return Color.FromArgb(Clamp((int)((float)(sourceColor.R * Avg / AvgR)),0,255),
+                                  Clamp((int)((float)(sourceColor.G * Avg / AvgG)),0,255),
+                                  Clamp((int)((float)(sourceColor.B * Avg / AvgB)),0,255));
+        }
+    }
+
+    public class PerfectReflectorFilter : GlobalFilter
+    {
+        int maxR;
+        int maxG;
+        int maxB;
+
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
+        {
+            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+
+            GetMax(sourceImage, out maxR, out maxG, out maxB, worker, 50, 0);
+           
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                worker.ReportProgress((int)((float)i / resultImage.Width * 50) + 50);
+                if (worker.CancellationPending)
+                    return null;
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    resultImage.SetPixel(i, j, calculateNewPixelColor(sourceImage, i, j));
+                }
+            }
+
+            return resultImage;
+        }
+
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color sourceColor = sourceImage.GetPixel(x, y);
+            return Color.FromArgb(Clamp((int)((float)(sourceColor.R * 255 / maxR)), 0, 255),
+                                  Clamp((int)((float)(sourceColor.G * 255 / maxG)), 0, 255),
+                                  Clamp((int)((float)(sourceColor.B * 255 / maxB)), 0, 255));
         }
     }
 

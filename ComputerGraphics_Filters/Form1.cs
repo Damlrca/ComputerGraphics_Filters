@@ -263,5 +263,15 @@ namespace ComputerGraphics_Filters
         {
             backgroundWorker1.RunWorkerAsync(new FloydSteinbergDitheringFilter());
         }
+
+        private void GrayWorld_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new GrayWorldFilter());
+        }
+
+        private void PerfectReflector_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new PerfectReflectorFilter());
+        }
     }
 }
