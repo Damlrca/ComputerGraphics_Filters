@@ -13,7 +13,9 @@ namespace ComputerGraphics_Filters
 {
     public partial class Form1 : Form
     {
-        Bitmap image;
+        Bitmap previous_image = null;
+        Bitmap image = null;
+        Filter lastFilter = null;
 
         public Form1()
         {
@@ -24,11 +26,11 @@ namespace ComputerGraphics_Filters
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                previous_image = image;
                 image = new Bitmap(openFileDialog1.FileName);
+                pictureBox1.Image = image;
+                pictureBox1.Refresh();
             }
-
-            pictureBox1.Image = image;
-            pictureBox1.Refresh();
         }
 
         private void Save_as_ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -46,6 +48,8 @@ namespace ComputerGraphics_Filters
 
             if (!backgroundWorker1.CancellationPending)
             {
+                previous_image = image;
+                lastFilter = (Filter)e.Argument;
                 image = resultImage;
             }
         }
@@ -68,6 +72,18 @@ namespace ComputerGraphics_Filters
         private void Cancel_button_Click(object sender, EventArgs e)
         {
             backgroundWorker1.CancelAsync();
+        }
+
+        private void undo_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            image = previous_image;
+            pictureBox1.Image = image;
+            pictureBox1.Refresh();
+        }
+
+        private void repeat_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(lastFilter);
         }
 
         // Точечные фильтры
@@ -190,6 +206,35 @@ namespace ComputerGraphics_Filters
         private void IncreaseContrast_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new ContrastFilter());
+        }
+
+        private void autolevels_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new AutolevelsFilter());
+        }
+
+        // Шумы
+
+        private void saltAndPepper_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new SaltAndPepperFilter());
+        }
+
+        // Каналы
+
+        private void rRGB_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new rRGBFilter());
+        }
+
+        private void gRGB_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new gRGBFilter());
+        }
+
+        private void bRGB_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new bRGBFilter());
         }
     }
 }

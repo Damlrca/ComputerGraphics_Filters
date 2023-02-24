@@ -152,7 +152,7 @@ namespace Filters
 
     public class GlassFilter : Filter
     {
-        private readonly Random random = new Random();
+        protected readonly Random random = new Random();
 
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
@@ -262,9 +262,10 @@ namespace Filters
                 for (int j = 0; j < sourceImage.Height; j++)
                 {
                     long pix = 0;
-                    pix += sourceImage.GetPixel(i, j).R;
-                    pix += sourceImage.GetPixel(i, j).G;
-                    pix += sourceImage.GetPixel(i, j).B;
+                    Color color = sourceImage.GetPixel(i, j);
+                    pix += color.R;
+                    pix += color.G;
+                    pix += color.B;
                     pix /= 3;
                     brightness += pix;
                 }
@@ -292,6 +293,103 @@ namespace Filters
             return Color.FromArgb(Clamp((int)(brightness + (sourceColor.R - brightness) * c), 0, 255),
                                   Clamp((int)(brightness + (sourceColor.G - brightness) * c), 0, 255),
                                   Clamp((int)(brightness + (sourceColor.B - brightness) * c), 0, 255));
+        }
+    }
+
+    public class AutolevelsFilter : Filter
+    {
+        int minR = 255, maxR = 0;
+        int minG = 255, maxG = 0;
+        int minB = 255, maxB = 0;
+
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
+        {
+            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                worker.ReportProgress((int)((float)i / resultImage.Width * 50));
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    Color color = sourceImage.GetPixel(i, j);
+                    minR = Math.Min(minR, color.R);
+                    maxR = Math.Max(maxR, color.R);
+                    minG = Math.Min(minG, color.G);
+                    maxG = Math.Max(maxG, color.G);
+                    minB = Math.Min(minB, color.B);
+                    maxB = Math.Max(maxB, color.B);
+                }
+            }
+
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                worker.ReportProgress((int)((float)i / resultImage.Width * 50) + 50);
+                if (worker.CancellationPending)
+                    return null;
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    resultImage.SetPixel(i, j, calculateNewPixelColor(sourceImage, i, j));
+                }
+            }
+
+            return resultImage;
+        }
+
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color sourceColor = sourceImage.GetPixel(x, y);
+            return Color.FromArgb(minR == maxR ? minR : (int)((sourceColor.R - minR) * 255.0 / (maxR - minR)),
+                                  minG == maxG ? minG : (int)((sourceColor.G - minG) * 255.0 / (maxG - minG)),
+                                  minB == maxB ? minB : (int)((sourceColor.B - minB) * 255.0 / (maxB - minB)));
+        }
+    }
+
+    // Шумы
+
+    public class SaltAndPepperFilter : Filter
+    {
+        protected readonly Random random = new Random();
+        protected double p_white = 0.05f;
+        protected double p_black = 0.05f;
+
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            double p = random.NextDouble();
+            if (p < p_white)
+                return Color.White;
+            else if (p + p_black > 1)
+                return Color.Black;
+            else
+                return sourceImage.GetPixel(x, y);
+        }
+    }
+
+    // Каналы
+
+    public class rRGBFilter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            int r = sourceImage.GetPixel(x, y).R;
+            return Color.FromArgb(r, r, r);
+        }
+    }
+
+    public class gRGBFilter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            int g = sourceImage.GetPixel(x, y).G;
+            return Color.FromArgb(g, g, g);
+        }
+    }
+
+    public class bRGBFilter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            int b = sourceImage.GetPixel(x, y).B;
+            return Color.FromArgb(b, b, b);
         }
     }
 }
