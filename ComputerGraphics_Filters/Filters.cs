@@ -399,4 +399,70 @@ namespace Filters
                 return sourceImage.GetPixel(x, y);
         }
     }
+
+    // Дизеринг
+
+    public class QuantizationFilter : Filter
+    {
+        protected int k = 2;
+
+        protected int getQuantized(int x)
+        {
+            int j = Math.Max(1, (x * k + 254) / 255); // j == 1...k
+            return (j - 1) * 255 / (k - 1); // j - 1 == 0 .. k - 1
+        }
+
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color sourceColor = sourceImage.GetPixel(x, y);
+            return Color.FromArgb(getQuantized(sourceColor.R),
+                                  getQuantized(sourceColor.G),
+                                  getQuantized(sourceColor.B));
+        }
+    }
+
+    public class FloydSteinbergDitheringFilter : QuantizationFilter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color sourceColor = sourceImage.GetPixel(x, y);
+            Color newColor = base.calculateNewPixelColor(sourceImage, x, y);
+            int quant_errorR = sourceColor.R - newColor.R;
+            int quant_errorG = sourceColor.G - newColor.G;
+            int quant_errorB = sourceColor.B - newColor.B;
+            if (x + 1 < sourceImage.Width)
+            {
+                Color color = sourceImage.GetPixel(x + 1, y);
+                sourceImage.SetPixel(x + 1, y, Color.FromArgb(
+                    Clamp(color.R + quant_errorR * 7 / 16, 0, 255),
+                    Clamp(color.G + quant_errorG * 7 / 16, 0, 255),
+                    Clamp(color.B + quant_errorB * 7 / 16, 0, 255)));
+            }
+            if (x - 1 >= 0 && y + 1 < sourceImage.Height)
+            {
+                Color color = sourceImage.GetPixel(x - 1, y + 1);
+                sourceImage.SetPixel(x - 1, y + 1, Color.FromArgb(
+                    Clamp(color.R + quant_errorR * 3 / 16, 0, 255),
+                    Clamp(color.G + quant_errorG * 3 / 16, 0, 255),
+                    Clamp(color.B + quant_errorB * 3 / 16, 0, 255)));
+            }
+            if (y + 1 < sourceImage.Height)
+            {
+                Color color = sourceImage.GetPixel(x, y + 1);
+                sourceImage.SetPixel(x, y + 1, Color.FromArgb(
+                    Clamp(color.R + quant_errorR * 5 / 16, 0, 255),
+                    Clamp(color.G + quant_errorG * 5 / 16, 0, 255),
+                    Clamp(color.B + quant_errorB * 5 / 16, 0, 255)));
+            }
+            if (x + 1 < sourceImage.Width && y + 1 < sourceImage.Height)
+            {
+                Color color = sourceImage.GetPixel(x + 1, y + 1);
+                sourceImage.SetPixel(x + 1, y + 1, Color.FromArgb(
+                    Clamp(color.R + quant_errorR * 1 / 16, 0, 255),
+                    Clamp(color.G + quant_errorG * 1 / 16, 0, 255),
+                    Clamp(color.B + quant_errorB * 1 / 16, 0, 255)));
+            }
+            return newColor;
+        }
+    }
 }

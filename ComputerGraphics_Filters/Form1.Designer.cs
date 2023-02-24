@@ -69,13 +69,9 @@
             this.autolevels_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.noises_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saltAndPepper_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.cancel_button = new System.Windows.Forms.Button();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.dithering_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quantization_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.floydSteinbergDithering_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.channels_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RGB_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rRGB_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,6 +80,13 @@
             this.rgRGB_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rbRGB_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbRGB_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.cancel_button = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -161,7 +164,8 @@
             this.geometric_ToolStripMenuItem,
             this.nonLinear_ToolStripMenuItem,
             this.global_ToolStripMenuItem,
-            this.noises_ToolStripMenuItem});
+            this.noises_ToolStripMenuItem,
+            this.dithering_ToolStripMenuItem});
             this.filters_ToolStripMenuItem.Name = "filters_ToolStripMenuItem";
             this.filters_ToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
             this.filters_ToolStripMenuItem.Text = "Фильтры";
@@ -424,6 +428,92 @@
             this.saltAndPepper_ToolStripMenuItem.Text = "Соль и перец";
             this.saltAndPepper_ToolStripMenuItem.Click += new System.EventHandler(this.saltAndPepper_ToolStripMenuItem_Click);
             // 
+            // dithering_ToolStripMenuItem
+            // 
+            this.dithering_ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.quantization_ToolStripMenuItem,
+            this.floydSteinbergDithering_ToolStripMenuItem});
+            this.dithering_ToolStripMenuItem.Name = "dithering_ToolStripMenuItem";
+            this.dithering_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.dithering_ToolStripMenuItem.Text = "Дизеринг";
+            // 
+            // quantization_ToolStripMenuItem
+            // 
+            this.quantization_ToolStripMenuItem.Name = "quantization_ToolStripMenuItem";
+            this.quantization_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.quantization_ToolStripMenuItem.Text = "Квантование";
+            this.quantization_ToolStripMenuItem.Click += new System.EventHandler(this.Quantization_ToolStripMenuItem_Click);
+            // 
+            // floydSteinbergDithering_ToolStripMenuItem
+            // 
+            this.floydSteinbergDithering_ToolStripMenuItem.Name = "floydSteinbergDithering_ToolStripMenuItem";
+            this.floydSteinbergDithering_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.floydSteinbergDithering_ToolStripMenuItem.Text = "Дизеринг";
+            this.floydSteinbergDithering_ToolStripMenuItem.Click += new System.EventHandler(this.FloydSteinbergDithering_ToolStripMenuItem1_Click);
+            // 
+            // channels_ToolStripMenuItem
+            // 
+            this.channels_ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RGB_ToolStripMenuItem});
+            this.channels_ToolStripMenuItem.Name = "channels_ToolStripMenuItem";
+            this.channels_ToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+            this.channels_ToolStripMenuItem.Text = "Каналы";
+            // 
+            // RGB_ToolStripMenuItem
+            // 
+            this.RGB_ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rRGB_ToolStripMenuItem,
+            this.gRGB_ToolStripMenuItem,
+            this.bRGB_ToolStripMenuItem,
+            this.rgRGB_ToolStripMenuItem,
+            this.rbRGB_ToolStripMenuItem,
+            this.gbRGB_ToolStripMenuItem});
+            this.RGB_ToolStripMenuItem.Name = "RGB_ToolStripMenuItem";
+            this.RGB_ToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
+            this.RGB_ToolStripMenuItem.Text = "RGB";
+            // 
+            // rRGB_ToolStripMenuItem
+            // 
+            this.rRGB_ToolStripMenuItem.Name = "rRGB_ToolStripMenuItem";
+            this.rRGB_ToolStripMenuItem.Size = new System.Drawing.Size(111, 26);
+            this.rRGB_ToolStripMenuItem.Text = "R";
+            this.rRGB_ToolStripMenuItem.Click += new System.EventHandler(this.rRGB_ToolStripMenuItem_Click);
+            // 
+            // gRGB_ToolStripMenuItem
+            // 
+            this.gRGB_ToolStripMenuItem.Name = "gRGB_ToolStripMenuItem";
+            this.gRGB_ToolStripMenuItem.Size = new System.Drawing.Size(111, 26);
+            this.gRGB_ToolStripMenuItem.Text = "G";
+            this.gRGB_ToolStripMenuItem.Click += new System.EventHandler(this.gRGB_ToolStripMenuItem_Click);
+            // 
+            // bRGB_ToolStripMenuItem
+            // 
+            this.bRGB_ToolStripMenuItem.Name = "bRGB_ToolStripMenuItem";
+            this.bRGB_ToolStripMenuItem.Size = new System.Drawing.Size(111, 26);
+            this.bRGB_ToolStripMenuItem.Text = "B";
+            this.bRGB_ToolStripMenuItem.Click += new System.EventHandler(this.bRGB_ToolStripMenuItem_Click);
+            // 
+            // rgRGB_ToolStripMenuItem
+            // 
+            this.rgRGB_ToolStripMenuItem.Name = "rgRGB_ToolStripMenuItem";
+            this.rgRGB_ToolStripMenuItem.Size = new System.Drawing.Size(111, 26);
+            this.rgRGB_ToolStripMenuItem.Text = "RG";
+            this.rgRGB_ToolStripMenuItem.Click += new System.EventHandler(this.rgRGB_ToolStripMenuItem_Click);
+            // 
+            // rbRGB_ToolStripMenuItem
+            // 
+            this.rbRGB_ToolStripMenuItem.Name = "rbRGB_ToolStripMenuItem";
+            this.rbRGB_ToolStripMenuItem.Size = new System.Drawing.Size(111, 26);
+            this.rbRGB_ToolStripMenuItem.Text = "RB";
+            this.rbRGB_ToolStripMenuItem.Click += new System.EventHandler(this.rbRGB_ToolStripMenuItem_Click);
+            // 
+            // gbRGB_ToolStripMenuItem
+            // 
+            this.gbRGB_ToolStripMenuItem.Name = "gbRGB_ToolStripMenuItem";
+            this.gbRGB_ToolStripMenuItem.Size = new System.Drawing.Size(111, 26);
+            this.gbRGB_ToolStripMenuItem.Text = "GB";
+            this.gbRGB_ToolStripMenuItem.Click += new System.EventHandler(this.gbRGB_ToolStripMenuItem_Click);
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.Filter = "Image files | *.png; *.jpg; *.bmp; | All files(*.*) | *.*";
@@ -495,69 +585,6 @@
             // 
             this.saveFileDialog1.FileName = "filename.png";
             this.saveFileDialog1.Filter = "Image files | *.png; *.jpg; *.bmp; | All files(*.*) | *.*";
-            // 
-            // channels_ToolStripMenuItem
-            // 
-            this.channels_ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.RGB_ToolStripMenuItem});
-            this.channels_ToolStripMenuItem.Name = "channels_ToolStripMenuItem";
-            this.channels_ToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
-            this.channels_ToolStripMenuItem.Text = "Каналы";
-            // 
-            // RGB_ToolStripMenuItem
-            // 
-            this.RGB_ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rRGB_ToolStripMenuItem,
-            this.gRGB_ToolStripMenuItem,
-            this.bRGB_ToolStripMenuItem,
-            this.rgRGB_ToolStripMenuItem,
-            this.rbRGB_ToolStripMenuItem,
-            this.gbRGB_ToolStripMenuItem});
-            this.RGB_ToolStripMenuItem.Name = "RGB_ToolStripMenuItem";
-            this.RGB_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.RGB_ToolStripMenuItem.Text = "RGB";
-            // 
-            // rRGB_ToolStripMenuItem
-            // 
-            this.rRGB_ToolStripMenuItem.Name = "rRGB_ToolStripMenuItem";
-            this.rRGB_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.rRGB_ToolStripMenuItem.Text = "R";
-            this.rRGB_ToolStripMenuItem.Click += new System.EventHandler(this.rRGB_ToolStripMenuItem_Click);
-            // 
-            // gRGB_ToolStripMenuItem
-            // 
-            this.gRGB_ToolStripMenuItem.Name = "gRGB_ToolStripMenuItem";
-            this.gRGB_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.gRGB_ToolStripMenuItem.Text = "G";
-            this.gRGB_ToolStripMenuItem.Click += new System.EventHandler(this.gRGB_ToolStripMenuItem_Click);
-            // 
-            // bRGB_ToolStripMenuItem
-            // 
-            this.bRGB_ToolStripMenuItem.Name = "bRGB_ToolStripMenuItem";
-            this.bRGB_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.bRGB_ToolStripMenuItem.Text = "B";
-            this.bRGB_ToolStripMenuItem.Click += new System.EventHandler(this.bRGB_ToolStripMenuItem_Click);
-            // 
-            // rgRGB_ToolStripMenuItem
-            // 
-            this.rgRGB_ToolStripMenuItem.Name = "rgRGB_ToolStripMenuItem";
-            this.rgRGB_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.rgRGB_ToolStripMenuItem.Text = "RG";
-            this.rgRGB_ToolStripMenuItem.Click += new System.EventHandler(this.rgRGB_ToolStripMenuItem_Click);
-            // 
-            // rbRGB_ToolStripMenuItem
-            // 
-            this.rbRGB_ToolStripMenuItem.Name = "rbRGB_ToolStripMenuItem";
-            this.rbRGB_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.rbRGB_ToolStripMenuItem.Text = "RB";
-            this.rbRGB_ToolStripMenuItem.Click += new System.EventHandler(this.rbRGB_ToolStripMenuItem_Click);
-            // 
-            // gbRGB_ToolStripMenuItem
-            // 
-            this.gbRGB_ToolStripMenuItem.Name = "gbRGB_ToolStripMenuItem";
-            this.gbRGB_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.gbRGB_ToolStripMenuItem.Text = "GB";
-            this.gbRGB_ToolStripMenuItem.Click += new System.EventHandler(this.gbRGB_ToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -637,6 +664,9 @@
         private System.Windows.Forms.ToolStripMenuItem rgRGB_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rbRGB_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gbRGB_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dithering_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem quantization_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem floydSteinbergDithering_ToolStripMenuItem;
     }
 }
 
