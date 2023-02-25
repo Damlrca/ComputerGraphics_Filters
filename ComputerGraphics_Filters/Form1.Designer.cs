@@ -79,6 +79,8 @@
             this.сужениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.открытиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.закрытиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.topHadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blackHatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.channels_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RGB_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rRGB_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,6 +96,7 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.gradToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -481,7 +484,10 @@
             this.расширениеToolStripMenuItem,
             this.сужениеToolStripMenuItem,
             this.открытиеToolStripMenuItem,
-            this.закрытиеToolStripMenuItem});
+            this.закрытиеToolStripMenuItem,
+            this.topHadToolStripMenuItem,
+            this.blackHatToolStripMenuItem,
+            this.gradToolStripMenuItem});
             this.морфологическиеToolStripMenuItem.Name = "морфологическиеToolStripMenuItem";
             this.морфологическиеToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.морфологическиеToolStripMenuItem.Text = "Морфологические";
@@ -513,6 +519,20 @@
             this.закрытиеToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.закрытиеToolStripMenuItem.Text = "Закрытие";
             this.закрытиеToolStripMenuItem.Click += new System.EventHandler(this.CloseFilter_ToolStripMenuItem_Click);
+            // 
+            // topHadToolStripMenuItem
+            // 
+            this.topHadToolStripMenuItem.Name = "topHadToolStripMenuItem";
+            this.topHadToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.topHadToolStripMenuItem.Text = "Top Hat";
+            this.topHadToolStripMenuItem.Click += new System.EventHandler(this.TopHat_ToolStripMenuItem_Click);
+            // 
+            // blackHatToolStripMenuItem
+            // 
+            this.blackHatToolStripMenuItem.Name = "blackHatToolStripMenuItem";
+            this.blackHatToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.blackHatToolStripMenuItem.Text = "Black Hat";
+            this.blackHatToolStripMenuItem.Click += new System.EventHandler(this.BlackHat_ToolStripMenuItem_Click);
             // 
             // channels_ToolStripMenuItem
             // 
@@ -649,6 +669,13 @@
             this.saveFileDialog1.FileName = "filename.png";
             this.saveFileDialog1.Filter = "Image files | *.png; *.jpg; *.bmp; | All files(*.*) | *.*";
             // 
+            // gradToolStripMenuItem
+            // 
+            this.gradToolStripMenuItem.Name = "gradToolStripMenuItem";
+            this.gradToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.gradToolStripMenuItem.Text = "Grad";
+            this.gradToolStripMenuItem.Click += new System.EventHandler(this.Grad_ToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -737,6 +764,9 @@
         private System.Windows.Forms.ToolStripMenuItem сужениеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem открытиеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem закрытиеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem topHadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem blackHatToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gradToolStripMenuItem;
     }
 }
 

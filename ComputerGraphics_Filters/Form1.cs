@@ -293,5 +293,20 @@ namespace ComputerGraphics_Filters
         {
             backgroundWorker1.RunWorkerAsync(new MorphologicalCloseFilter());
         }
+
+        private void TopHat_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new MorphologicalTopHatFilter());
+        }
+
+        private void BlackHat_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new MorphologicalBlackHatFilter());
+        }
+
+        private void Grad_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new MorphologicalGradFilter());
+        }
     }
 }
