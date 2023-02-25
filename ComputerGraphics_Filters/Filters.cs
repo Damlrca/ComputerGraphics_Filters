@@ -309,11 +309,11 @@ namespace Filters
             }
         }
 
-        public void GetAvarageColors(Bitmap sourceImage, out int R, out int G, out int B, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
+        public void GetAverageBrightness(Bitmap sourceImage, out int R, out int G, out int B, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
         {
-            //Даёт среднюю яркость по каждому каналу
+            // Даёт среднюю яркость по каждому каналу
             R = G = B = 0;
-            long tR = 0; long tG = 0; long tB = 0;
+            long tR = 0, tG = 0, tB = 0;
             for (int i = 0; i < sourceImage.Width; i++)
             {
                 worker.ReportProgress((int)((float)i / sourceImage.Width * MaxPercent) + add);
@@ -369,9 +369,9 @@ namespace Filters
 
     public class AutolevelsFilter : GlobalFilter
     {
-        int minR, maxR;
-        int minG, maxG;
-        int minB, maxB;
+        protected int minR, maxR;
+        protected int minG, maxG;
+        protected int minB, maxB;
 
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
         {
@@ -405,17 +405,17 @@ namespace Filters
 
     public class GrayWorldFilter : GlobalFilter
     {
-        int Avg;
-        int AvgR;
-        int AvgG;
-        int AvgB;
+        protected int Avg;
+        protected int AvgR;
+        protected int AvgG;
+        protected int AvgB;
 
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
 
-            GetAvarageColors(sourceImage, out AvgR, out AvgG, out AvgB, worker, 50, 0);
-            Avg = (int)(AvgR + AvgG + AvgB) / 3;
+            GetAverageBrightness(sourceImage, out AvgR, out AvgG, out AvgB, worker, 50, 0);
+            Avg = (AvgR + AvgG + AvgB) / 3;
             for (int i = 0; i < sourceImage.Width; i++)
             {
                 worker.ReportProgress((int)((float)i / resultImage.Width * 50) + 50);
@@ -441,9 +441,9 @@ namespace Filters
 
     public class PerfectReflectorFilter : GlobalFilter
     {
-        int maxR;
-        int maxG;
-        int maxB;
+        protected int maxR;
+        protected int maxG;
+        protected int maxB;
 
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker,int MaxPercent = 100, int add = 0)
         {
@@ -561,43 +561,45 @@ namespace Filters
     }
 
     //Морфологические
+
     public class MorphologicalFilters : Filter
     {
         protected float[,] mask = null;
         protected int n;
         protected int m;
+
         public MorphologicalFilters()
         {
-            n = 2;m = 2;
-            mask = new float[5, 5]{
-            {1,1,1,1,1},
-            {1,1,1,1,1},
-            {1,1,1,1,1},
-            {1,1,1,1,1},
-            {1,1,1,1,1}};
+            mask = new float[,] {
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 }};
+            n = mask.GetLength(0) / 2;
+            m = mask.GetLength(1) / 2;
         }
+
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             return Color.FromArgb(0, 0, 0);
         }
-        
     }
 
     public class MorphologicalDilationFilter : MorphologicalFilters
     {
-       
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             int maxR = 0;
             int maxG = 0;
             int maxB = 0;
-            for(int i = -n; i <= n; i++)
+            for (int i = -n; i <= n; i++)
             {
-                for(int j = -m; j <= m; j++)
+                for (int j = -m; j <= m; j++)
                 {
                     int xx = x + i;
                     int yy = y + j;
-                    if(mask[i+n,j+m] == 1 && xx >=0 && yy >=0 && xx < sourceImage.Width && yy < sourceImage.Height)
+                    if (mask[i + n, j + m] == 1 && xx >= 0 && yy >= 0 && xx < sourceImage.Width && yy < sourceImage.Height)
                     {
                         Color color = sourceImage.GetPixel(xx, yy);
                         maxR = Math.Max(maxR, color.R);
@@ -636,43 +638,43 @@ namespace Filters
         }
     }
 
-    public class MorphologicalOpenFilter : MorphologicalFilters
+    public class MorphologicalOpeningFilter : MorphologicalFilters
     {
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
         {
             Filter tmp = new MorphologicalErosionFilter();
             Filter tmp2 = new MorphologicalDilationFilter();
-            return tmp2.processImage(tmp.processImage(sourceImage,worker,50,0),worker,50,50);
+            return tmp2.processImage(tmp.processImage(sourceImage, worker, 50, 0), worker, 50, 50);
         }
     }
 
-    public class MorphologicalCloseFilter : MorphologicalFilters
+    public class MorphologicalClosingFilter : MorphologicalFilters
     {
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
         {
             Filter tmp = new MorphologicalDilationFilter();
             Filter tmp2 = new MorphologicalErosionFilter();
-            return tmp2.processImage(tmp.processImage(sourceImage, worker,50,0), worker,50,50);
+            return tmp2.processImage(tmp.processImage(sourceImage, worker, 50, 0), worker, 50, 50);
         }
     }
 
-    public class MorphologicalTopHatFilter:MorphologicalFilters
+    public class MorphologicalTopHatFilter : MorphologicalFilters
     {
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
-            Filter filter = new MorphologicalCloseFilter();
-            Bitmap closingImage = filter.processImage(sourceImage,worker,50,0);
-            
-            for(int i = 0; i < sourceImage.Width; i++)
+            Filter filter = new MorphologicalClosingFilter();
+            Bitmap closingImage = filter.processImage(sourceImage, worker, 50, 0);
+
+            for (int i = 0; i < sourceImage.Width; i++)
             {
                 worker.ReportProgress((int)((float)i / resultImage.Width * 50) + 50);
                 if (worker.CancellationPending)
                     return null;
-                for (int j = 0;j< sourceImage.Height; j++)
+                for (int j = 0; j < sourceImage.Height; j++)
                 {
-                    Color color = sourceImage.GetPixel(i,j);
-                    Color color_closing = closingImage.GetPixel(i,j);
+                    Color color = sourceImage.GetPixel(i, j);
+                    Color color_closing = closingImage.GetPixel(i, j);
                     resultImage.SetPixel(i, j, Color.FromArgb(
                         Clamp(-color.R + color_closing.R, 0, 255),
                         Clamp(-color.G + color_closing.G, 0, 255),
@@ -724,7 +726,7 @@ namespace Filters
 
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / resultImage.Width * 33) + 66);
+                worker.ReportProgress((int)((float)i / resultImage.Width * 34) + 66);
                 if (worker.CancellationPending)
                     return null;
                 for (int j = 0; j < sourceImage.Height; j++)
@@ -740,5 +742,4 @@ namespace Filters
             return resultImage;
         }
     }
-
 }
