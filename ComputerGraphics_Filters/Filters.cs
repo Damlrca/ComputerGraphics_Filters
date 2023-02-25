@@ -474,51 +474,6 @@ namespace Filters
         }
     }
 
-    public class ReferenceColorFilter : GlobalFilter
-    {
-        float dstR = 92;
-        float dstG = 120;
-        float dstB = 126;
-
-        float srcR;
-        float srcG;
-        float srcB;
-
-        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
-        {
-            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
-
-            int srcx = 5;
-            int srcy = sourceImage.Height - 5;
-            Color src = sourceImage.GetPixel(srcx, srcy);
-            srcR = src.R;
-            srcG = src.G;
-            srcB = src.B;
-
-            for (int i = 0; i < sourceImage.Width; i++)
-            {
-                worker.ReportProgress((int)((float)i / resultImage.Width * 50) + 50);
-                if (worker.CancellationPending)
-                    return null;
-                for (int j = 0; j < sourceImage.Height; j++)
-                {
-                    resultImage.SetPixel(i, j, calculateNewPixelColor(sourceImage, i, j));
-                }
-            }
-
-            return resultImage;
-        }
-
-        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
-        {
-            Color sourceColor = sourceImage.GetPixel(x, y);
-
-            return Color.FromArgb(Clamp((int)((float)(sourceColor.R * (dstR / srcR))), 0, 255),
-                                  Clamp((int)((float)(sourceColor.G * (dstG / srcG))), 0, 255),
-                                  Clamp((int)((float)(sourceColor.B * (dstB / srcB))), 0, 255));
-        }
-    }
-
     // Шумы
 
     public class SaltAndPepperFilter : Filter
