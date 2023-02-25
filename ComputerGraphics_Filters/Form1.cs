@@ -273,5 +273,25 @@ namespace ComputerGraphics_Filters
         {
             backgroundWorker1.RunWorkerAsync(new PerfectReflectorFilter());
         }
+
+        private void Dilation_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new MorphologicalDilationFilter());
+        }
+
+        private void Erosion_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new MorphologicalErosionFilter());
+        }
+
+        private void OpenFilter_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new MorphologicalOpenFilter());
+        }
+
+        private void CloseFilter_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new MorphologicalCloseFilter());
+        }
     }
 }

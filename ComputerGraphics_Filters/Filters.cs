@@ -12,13 +12,13 @@ namespace Filters
     {
         protected abstract Color calculateNewPixelColor(Bitmap sourceImage, int x, int y);
 
-        public virtual Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
+        public virtual Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker,int MaxPercent = 100, int add = 0)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
 
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / resultImage.Width * 100));
+                worker.ReportProgress((int)((float)i / resultImage.Width * MaxPercent) + add);
                 if (worker.CancellationPending)
                     return null;
                 for (int j = 0; j < sourceImage.Height; j++)
@@ -330,17 +330,14 @@ namespace Filters
             R = (int)tR / (sourceImage.Width * sourceImage.Height);
             G = (int)tG / (sourceImage.Width * sourceImage.Height);
             B = (int)tB / (sourceImage.Width * sourceImage.Height);
-
         }
-
-
     }
 
     public class ContrastFilter : GlobalFilter
     {
         protected int brightness = 0;
 
-        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
 
@@ -376,7 +373,7 @@ namespace Filters
         int minG, maxG;
         int minB, maxB;
 
-        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
 
@@ -413,7 +410,7 @@ namespace Filters
         int AvgG;
         int AvgB;
 
-        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
 
@@ -448,7 +445,7 @@ namespace Filters
         int maxG;
         int maxB;
 
-        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker,int MaxPercent = 100, int add = 0)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
 
@@ -562,4 +559,99 @@ namespace Filters
             return newColor;
         }
     }
+
+    //Морфологические
+    public class MorphologicalFilters : Filter
+    {
+        protected float[,] mask = null;
+        protected int n;
+        protected int m;
+        public MorphologicalFilters()
+        {
+            n = 1;m = 1;
+            mask = new float[3, 3]{
+            {1,1,1},
+            {1,1,1},
+            {1,1,1}};
+        }
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            return Color.FromArgb(0, 0, 0);
+        }
+        
+    }
+
+    public class MorphologicalDilationFilter : MorphologicalFilters
+    {
+       
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            int maxR = 0;
+            int maxG = 0;
+            int maxB = 0;
+            for(int i = -n; i <= n; i++)
+            {
+                for(int j = -m; j <= m; j++)
+                {
+                    int xx = x + i;
+                    int yy = y + j;
+                    if(mask[i+n,j+m] == 1 && xx >=0 && yy >=0 && xx < sourceImage.Width && yy < sourceImage.Height)
+                    {
+                        Color color = sourceImage.GetPixel(xx, yy);
+                        maxR = Math.Max(maxR, color.R);
+                        maxG = Math.Max(maxG, color.G);
+                        maxB = Math.Max(maxB, color.B);
+                    }
+                }
+            }
+            return Color.FromArgb(maxR, maxG, maxB);
+        }
+    }
+
+    public class MorphologicalErosionFilter : MorphologicalFilters
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            int minR = 255;
+            int minG = 255;
+            int minB = 255;
+            for (int i = -n; i <= n; i++)
+            {
+                for (int j = -m; j <= m; j++)
+                {
+                    int xx = x + i;
+                    int yy = y + j;
+                    if (mask[i + n, j + m] == 1 && xx >= 0 && yy >= 0 && xx < sourceImage.Width && yy < sourceImage.Height)
+                    {
+                        Color color = sourceImage.GetPixel(xx, yy);
+                        minR = Math.Min(minR, color.R);
+                        minG = Math.Min(minG, color.G);
+                        minB = Math.Min(minB, color.B);
+                    }
+                }
+            }
+            return Color.FromArgb(minR, minG, minB);
+        }
+    }
+
+    public class MorphologicalOpenFilter : MorphologicalFilters
+    {
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
+        {
+            Filter tmp = new MorphologicalErosionFilter();
+            Filter tmp2 = new MorphologicalDilationFilter();
+            return tmp2.processImage(tmp.processImage(sourceImage,worker,50,0),worker,50,50);
+        }
+    }
+
+    public class MorphologicalCloseFilter : MorphologicalFilters
+    {
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
+        {
+            Filter tmp = new MorphologicalDilationFilter();
+            Filter tmp2 = new MorphologicalErosionFilter();
+            return tmp2.processImage(tmp.processImage(sourceImage, worker,50,0), worker,50,50);
+        }
+    }
+
 }
