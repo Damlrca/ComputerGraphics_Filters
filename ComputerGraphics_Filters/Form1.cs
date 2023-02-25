@@ -308,5 +308,10 @@ namespace ComputerGraphics_Filters
         {
             backgroundWorker1.RunWorkerAsync(new MorphologicalGradFilter());
         }
+
+        private void ReferenceColorCorrection_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new ReferenceColorFilter());
+        }
     }
 }
