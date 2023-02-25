@@ -494,10 +494,10 @@ namespace Filters
             srcR = src.R;
             srcG = src.G;
             srcB = src.B;
-
+            
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / resultImage.Width * 50) + 50);
+                worker.ReportProgress((int)((float)i / resultImage.Width * MaxPercent) + add);
                 if (worker.CancellationPending)
                     return null;
                 for (int j = 0; j < sourceImage.Height; j++)
