@@ -284,14 +284,14 @@ namespace ComputerGraphics_Filters
             backgroundWorker1.RunWorkerAsync(new MorphologicalErosionFilter());
         }
 
-        private void OpenFilter_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpeningFilter_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            backgroundWorker1.RunWorkerAsync(new MorphologicalOpenFilter());
+            backgroundWorker1.RunWorkerAsync(new MorphologicalOpeningFilter());
         }
 
-        private void CloseFilter_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ClosingFilter_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            backgroundWorker1.RunWorkerAsync(new MorphologicalCloseFilter());
+            backgroundWorker1.RunWorkerAsync(new MorphologicalClosingFilter());
         }
 
         private void TopHat_ToolStripMenuItem_Click(object sender, EventArgs e)
