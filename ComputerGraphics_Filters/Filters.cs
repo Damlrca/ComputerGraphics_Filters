@@ -568,11 +568,13 @@ namespace Filters
         protected int m;
         public MorphologicalFilters()
         {
-            n = 1;m = 1;
-            mask = new float[3, 3]{
-            {1,1,1},
-            {1,1,1},
-            {1,1,1}};
+            n = 2;m = 2;
+            mask = new float[5, 5]{
+            {1,1,1,1,1},
+            {1,1,1,1,1},
+            {1,1,1,1,1},
+            {1,1,1,1,1},
+            {1,1,1,1,1}};
         }
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
@@ -651,6 +653,91 @@ namespace Filters
             Filter tmp = new MorphologicalDilationFilter();
             Filter tmp2 = new MorphologicalErosionFilter();
             return tmp2.processImage(tmp.processImage(sourceImage, worker,50,0), worker,50,50);
+        }
+    }
+
+    public class MorphologicalTopHatFilter:MorphologicalFilters
+    {
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
+        {
+            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+            Filter filter = new MorphologicalCloseFilter();
+            Bitmap closingImage = filter.processImage(sourceImage,worker,50,0);
+            
+            for(int i = 0; i < sourceImage.Width; i++)
+            {
+                worker.ReportProgress((int)((float)i / resultImage.Width * 50) + 50);
+                if (worker.CancellationPending)
+                    return null;
+                for (int j = 0;j< sourceImage.Height; j++)
+                {
+                    Color color = sourceImage.GetPixel(i,j);
+                    Color color_closing = closingImage.GetPixel(i,j);
+                    resultImage.SetPixel(i, j, Color.FromArgb(
+                        Clamp(-color.R + color_closing.R, 0, 255),
+                        Clamp(-color.G + color_closing.G, 0, 255),
+                        Clamp(-color.B + color_closing.B, 0, 255)));
+                }
+            }
+            return resultImage;
+        }
+    }
+
+    public class MorphologicalBlackHatFilter : MorphologicalFilters
+    {
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
+        {
+            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+            Filter filter = new MorphologicalErosionFilter();
+            Bitmap openImage = filter.processImage(sourceImage, worker, 50, 0);
+
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                worker.ReportProgress((int)((float)i / resultImage.Width * 50) + 50);
+                if (worker.CancellationPending)
+                    return null;
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    Color color = sourceImage.GetPixel(i, j);
+                    Color color_open = openImage.GetPixel(i, j);
+                    resultImage.SetPixel(i, j, Color.FromArgb(
+                        Clamp(color.R - color_open.R, 0, 255),
+                        Clamp(color.G - color_open.G, 0, 255),
+                        Clamp(color.B - color_open.B, 0, 255)));
+                }
+            }
+            return resultImage;
+        }
+    }
+
+    public class MorphologicalGradFilter : MorphologicalFilters
+    {
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
+        {
+            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+
+            Filter Erosion = new MorphologicalErosionFilter();
+            Bitmap ErosionImage = Erosion.processImage(sourceImage, worker, 33, 0);
+
+            Filter Dilation = new MorphologicalDilationFilter();
+            Bitmap DilationImage = Dilation.processImage(sourceImage, worker, 33, 33);
+
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                worker.ReportProgress((int)((float)i / resultImage.Width * 33) + 66);
+                if (worker.CancellationPending)
+                    return null;
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    Color colorErosion = ErosionImage.GetPixel(i, j);
+                    Color colorDilation = DilationImage.GetPixel(i, j);
+                    resultImage.SetPixel(i, j, Color.FromArgb(
+                        Clamp(-colorErosion.R + colorDilation.R, 0, 255),
+                        Clamp(-colorErosion.G + colorDilation.G, 0, 255),
+                        Clamp(-colorErosion.B + colorDilation.B, 0, 255)));
+                }
+            }
+            return resultImage;
         }
     }
 
