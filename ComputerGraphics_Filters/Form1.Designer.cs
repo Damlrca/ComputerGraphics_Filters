@@ -157,7 +157,7 @@
             this.undo_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
             this.undo_ToolStripMenuItem.Size = new System.Drawing.Size(352, 26);
             this.undo_ToolStripMenuItem.Text = "Отменить";
-            this.undo_ToolStripMenuItem.Click += new System.EventHandler(this.undo_ToolStripMenuItem_Click);
+            this.undo_ToolStripMenuItem.Click += new System.EventHandler(this.Undo_ToolStripMenuItem_Click);
             // 
             // repeat_ToolStripMenuItem
             // 
@@ -165,7 +165,7 @@
             this.repeat_ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
             this.repeat_ToolStripMenuItem.Size = new System.Drawing.Size(352, 26);
             this.repeat_ToolStripMenuItem.Text = "Повторить последний фильтр";
-            this.repeat_ToolStripMenuItem.Click += new System.EventHandler(this.repeat_ToolStripMenuItem_Click);
+            this.repeat_ToolStripMenuItem.Click += new System.EventHandler(this.Repeat_ToolStripMenuItem_Click);
             // 
             // filters_ToolStripMenuItem
             // 
@@ -426,7 +426,7 @@
             this.autolevels_ToolStripMenuItem.Name = "autolevels_ToolStripMenuItem";
             this.autolevels_ToolStripMenuItem.Size = new System.Drawing.Size(347, 26);
             this.autolevels_ToolStripMenuItem.Text = "Линейное растяжение гистограммы";
-            this.autolevels_ToolStripMenuItem.Click += new System.EventHandler(this.autolevels_ToolStripMenuItem_Click);
+            this.autolevels_ToolStripMenuItem.Click += new System.EventHandler(this.Autolevels_ToolStripMenuItem_Click);
             // 
             // grayWorld_ToolStripMenuItem
             // 
@@ -462,7 +462,7 @@
             this.saltAndPepper_ToolStripMenuItem.Name = "saltAndPepper_ToolStripMenuItem";
             this.saltAndPepper_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.saltAndPepper_ToolStripMenuItem.Text = "Соль и перец";
-            this.saltAndPepper_ToolStripMenuItem.Click += new System.EventHandler(this.saltAndPepper_ToolStripMenuItem_Click);
+            this.saltAndPepper_ToolStripMenuItem.Click += new System.EventHandler(this.SaltAndPepper_ToolStripMenuItem_Click);
             // 
             // dithering_ToolStripMenuItem
             // 

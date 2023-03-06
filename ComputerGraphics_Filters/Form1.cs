@@ -74,14 +74,14 @@ namespace ComputerGraphics_Filters
             backgroundWorker1.CancelAsync();
         }
 
-        private void undo_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Undo_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             image = previous_image;
             pictureBox1.Image = image;
             pictureBox1.Refresh();
         }
 
-        private void repeat_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Repeat_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(lastFilter);
         }
@@ -208,14 +208,14 @@ namespace ComputerGraphics_Filters
             backgroundWorker1.RunWorkerAsync(new ContrastFilter());
         }
 
-        private void autolevels_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Autolevels_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new AutolevelsFilter());
         }
 
         // Шумы
 
-        private void saltAndPepper_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaltAndPepper_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new SaltAndPepperFilter());
         }
@@ -252,7 +252,7 @@ namespace ComputerGraphics_Filters
             backgroundWorker1.RunWorkerAsync(new gbRGBFilter());
         }
 
-        // Дизеринг
+        // Квантование и дизеринг
 
         private void Quantization_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -263,6 +263,8 @@ namespace ComputerGraphics_Filters
         {
             backgroundWorker1.RunWorkerAsync(new FloydSteinbergDitheringFilter());
         }
+
+        // Морфологические фильтры
 
         private void GrayWorld_ToolStripMenuItem_Click(object sender, EventArgs e)
         {

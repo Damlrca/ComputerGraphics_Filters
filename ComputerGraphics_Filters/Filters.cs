@@ -250,6 +250,9 @@ namespace Filters
 
     public abstract class GlobalFilter : Filter
     {
+        /// <summary>
+        /// Возвращает среднюю яркость по всем каналам
+        /// </summary>
         public int GetBrightness(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100)
         {
             long brightness = 0;
@@ -273,6 +276,9 @@ namespace Filters
             return (int)brightness;
         }
 
+        /// <summary>
+        /// Возвращает максимальную яркость по каждому каналу
+        /// </summary>
         public void GetMax(Bitmap sourceImage, out int R, out int G, out int B, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
         {
             R = G = B = 0;
@@ -291,6 +297,9 @@ namespace Filters
             }
         }
 
+        /// <summary>
+        /// Возвращает минимальную яркость по каждому каналу
+        /// </summary>
         public void GetMin(Bitmap sourceImage, out int R, out int G, out int B, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
         {
             R = G = B = 0;
@@ -309,9 +318,11 @@ namespace Filters
             }
         }
 
+        /// <summary>
+        /// Возвращает среднюю яркость по каждому каналу 
+        /// </summary>
         public void GetAverageBrightness(Bitmap sourceImage, out int R, out int G, out int B, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
         {
-            // Даёт среднюю яркость по каждому каналу
             R = G = B = 0;
             long tR = 0, tG = 0, tB = 0;
             for (int i = 0; i < sourceImage.Width; i++)
@@ -369,9 +380,8 @@ namespace Filters
 
     public class AutolevelsFilter : GlobalFilter
     {
-        protected int minR, maxR;
-        protected int minG, maxG;
-        protected int minB, maxB;
+        protected int minR, minG, minB;
+        protected int maxR, maxG, maxB;
 
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
         {
@@ -406,9 +416,7 @@ namespace Filters
     public class GrayWorldFilter : GlobalFilter
     {
         protected int Avg;
-        protected int AvgR;
-        protected int AvgG;
-        protected int AvgB;
+        protected int AvgR, AvgG, AvgB;
 
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
         {
@@ -441,9 +449,7 @@ namespace Filters
 
     public class PerfectReflectorFilter : GlobalFilter
     {
-        protected int maxR;
-        protected int maxG;
-        protected int maxB;
+        protected int maxR, maxG, maxB;
 
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker,int MaxPercent = 100, int add = 0)
         {
@@ -476,20 +482,19 @@ namespace Filters
 
     public class ReferenceColorFilter : GlobalFilter
     {
-        float dstR = 92;
-        float dstG = 120;
-        float dstB = 126;
+        // Целевой цвет:
+        float dstR = 92, dstG = 120, dstB = 126;
 
-        float srcR;
-        float srcG;
-        float srcB;
+        float srcR, srcG, srcB;
 
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
 
+            // Координаты указанного пикселя:
             int srcx = 5;
             int srcy = sourceImage.Height - 5;
+
             Color src = sourceImage.GetPixel(srcx, srcy);
             srcR = src.R;
             srcG = src.G;
@@ -539,24 +544,24 @@ namespace Filters
         }
     }
 
-    // Дизеринг
+    // Квантование и дизеринг
 
     public class QuantizationFilter : Filter
     {
-        protected int k = 2;
+        protected int k = 2; // Количество цветов в каждом канале
 
-        protected int getQuantized(int x)
+        protected int getQuantizedColor(int x)
         {
-            int j = Math.Max(1, (x * k + 254) / 255); // j == 1...k
-            return (j - 1) * 255 / (k - 1); // j - 1 == 0 .. k - 1
+            int j = Math.Max(1, (x * k + 254) / 255); // j in [1, k]
+            return (j - 1) * 255 / (k - 1); // j - 1 in [0, k - 1]
         }
 
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             Color sourceColor = sourceImage.GetPixel(x, y);
-            return Color.FromArgb(getQuantized(sourceColor.R),
-                                  getQuantized(sourceColor.G),
-                                  getQuantized(sourceColor.B));
+            return Color.FromArgb(getQuantizedColor(sourceColor.R),
+                                  getQuantizedColor(sourceColor.G),
+                                  getQuantizedColor(sourceColor.B));
         }
     }
 
@@ -605,7 +610,7 @@ namespace Filters
         }
     }
 
-    //Морфологические
+    // Морфологические фильтры
 
     public class MorphologicalFilters : Filter
     {
