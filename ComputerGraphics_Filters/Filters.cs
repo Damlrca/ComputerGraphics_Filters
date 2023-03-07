@@ -294,7 +294,7 @@ namespace Filters
         /// </summary>
         public void GetMin(Bitmap sourceImage, out int R, out int G, out int B, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
         {
-            R = G = B = 0;
+            R = G = B = 255;
             for (int i = 0; i < sourceImage.Width; i++)
             {
                 worker.ReportProgress((int)((double)i / sourceImage.Width * MaxPercent) + add);
