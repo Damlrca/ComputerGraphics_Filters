@@ -222,6 +222,8 @@ namespace ComputerGraphics_Filters
 
         // Каналы
 
+        // RGB
+
         private void rRGB_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new rRGBFilter());
@@ -250,6 +252,23 @@ namespace ComputerGraphics_Filters
         private void gbRGB_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync(new gbRGBFilter());
+        }
+
+        // YIQ
+
+        private void yYIQ_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new yYIQFilter());
+        }
+
+        private void iYIQ_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new iYIQFilter());
+        }
+
+        private void qYIQ_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync(new qYIQFilter());
         }
 
         // Квантование и дизеринг
