@@ -12,10 +12,10 @@ namespace Filters
 
     public class MatrixFilter : Filter
     {
-        protected float[,] kernel = null;
+        protected double[,] kernel = null;
 
         protected MatrixFilter() { }
-        public MatrixFilter(float[,] kernel)
+        public MatrixFilter(double[,] kernel)
         {
             this.kernel = kernel;
         }
@@ -25,9 +25,9 @@ namespace Filters
             int radiusX = kernel.GetLength(0) / 2;
             int radiusY = kernel.GetLength(1) / 2;
 
-            float resultR = 0;
-            float resultG = 0;
-            float resultB = 0;
+            double resultR = 0;
+            double resultG = 0;
+            double resultB = 0;
 
             for (int l = -radiusX; l <= radiusX; l++)
             {
@@ -56,10 +56,10 @@ namespace Filters
         {
             int sizeX = 9;
             int sizeY = 9;
-            kernel = new float[sizeX, sizeY];
+            kernel = new double[sizeX, sizeY];
             for (int i = 0; i < sizeX; i++)
                 for (int j = 0; j < sizeY; j++)
-                    kernel[i, j] = 1.0f / (sizeX * sizeY);
+                    kernel[i, j] = 1.0 / (sizeX * sizeY);
         }
     }
 
@@ -68,9 +68,9 @@ namespace Filters
         public MotionBlurFilter()
         {
             int n = 9;
-            kernel = new float[n, n];
+            kernel = new double[n, n];
             for (int i = 0; i < n; i++)
-                kernel[i, i] = 1.0f / n;
+                kernel[i, i] = 1.0 / n;
         }
     }
 
@@ -79,15 +79,15 @@ namespace Filters
         public GaussianFilter()
         {
             int radius = 3;
-            float sigma = 2;
+            double sigma = 2;
             int size = radius * 2 + 1;
-            kernel = new float[size, size];
-            float norm = 0;
+            kernel = new double[size, size];
+            double norm = 0;
             for (int i = -radius; i <= radius; i++)
             {
                 for (int j = -radius; j <= radius; j++)
                 {
-                    kernel[i + radius, j + radius] = (float)(Math.Exp(-(i * i + j * j) / (sigma * sigma)));
+                    kernel[i + radius, j + radius] = (double)(Math.Exp(-(i * i + j * j) / (sigma * sigma)));
                     norm += kernel[i + radius, j + radius];
                 }
             }
@@ -101,7 +101,7 @@ namespace Filters
     {
         public Sharpness1Filter()
         {
-            kernel = new float[3, 3] {
+            kernel = new double[3, 3] {
                 { 0, -1, 0 },
                 { -1, 5, -1 },
                 { 0, -1, 0 } };
@@ -112,7 +112,7 @@ namespace Filters
     {
         public Sharpness2Filter()
         {
-            kernel = new float[3, 3] {
+            kernel = new double[3, 3] {
                 { -1, -1, -1 },
                 { -1, 9, -1 },
                 { -1, -1, -1 } };
@@ -124,7 +124,7 @@ namespace Filters
         public EmbossingFilter()
         {
             // Направление освещения можно менять, но в сумме должен получаться 0
-            kernel = new float[3, 3] {
+            kernel = new double[3, 3] {
                 { 0, 1, 0 },
                 { 1, 0, -1 },
                 { 0, -1, 0 } };
@@ -135,9 +135,9 @@ namespace Filters
             int radiusX = kernel.GetLength(0) / 2;
             int radiusY = kernel.GetLength(1) / 2;
 
-            float resultR = 128;
-            float resultG = 128;
-            float resultB = 128;
+            double resultR = 128;
+            double resultG = 128;
+            double resultB = 128;
 
             for (int l = -radiusX; l <= radiusX; l++)
             {
@@ -164,18 +164,18 @@ namespace Filters
 
     public class GradientMatrixFilter : Filter
     {
-        protected float[,] kernelX = null;
-        protected float[,] kernelY = null;
+        protected double[,] kernelX = null;
+        protected double[,] kernelY = null;
 
         protected GradientMatrixFilter() { }
-        public GradientMatrixFilter(float[,] kernelX, float[,] kernelY)
+        public GradientMatrixFilter(double[,] kernelX, double[,] kernelY)
         {
             this.kernelX = kernelX;
             this.kernelY = kernelY;
         }
 
-        protected void calculatePartNewPixelColor(Bitmap sourceImage, int x, int y, float[,] kernel,
-            out float resultR, out float resultG, out float resultB)
+        protected void calculatePartNewPixelColor(Bitmap sourceImage, int x, int y, double[,] kernel,
+            out double resultR, out double resultG, out double resultB)
         {
             int radiusX = kernel.GetLength(0) / 2;
             int radiusY = kernel.GetLength(1) / 2;
@@ -199,9 +199,9 @@ namespace Filters
 
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
-            float resRX, resGX, resBX;
+            double resRX, resGX, resBX;
             calculatePartNewPixelColor(sourceImage, x, y, kernelX, out resRX, out resGX, out resBX);
-            float resRY, resGY, resBY;
+            double resRY, resGY, resBY;
             calculatePartNewPixelColor(sourceImage, x, y, kernelY, out resRY, out resGY, out resBY);
 
             return Color.FromArgb(
@@ -216,11 +216,11 @@ namespace Filters
     {
         public PrewittFilter()
         {
-            kernelX = new float[3, 3] {
+            kernelX = new double[3, 3] {
                 { -1, 0, 1 },
                 { -1, 0, 1 },
                 { -1, 0, 1 }};
-            kernelY = new float[3, 3] {
+            kernelY = new double[3, 3] {
                 { -1, -1, -1 },
                 { 0, 0, 0 },
                 { 1, 1, 1 }};
@@ -231,11 +231,11 @@ namespace Filters
     {
         public SobelFilter()
         {
-            kernelX = new float[3, 3] {
+            kernelX = new double[3, 3] {
                 { -1, 0, 1 },
                 { -2, 0, 2 },
                 { -1, 0, 1 }};
-            kernelY = new float[3, 3] {
+            kernelY = new double[3, 3] {
                 { -1, -2, -1 },
                 { 0, 0, 0 },
                 { 1, 2, 1 }};
@@ -246,11 +246,11 @@ namespace Filters
     {
         public ScharrFilter()
         {
-            kernelX = new float[3, 3] {
+            kernelX = new double[3, 3] {
                 { 3, 0, -3 },
                 { 10, 0, -10 },
                 { 3, 0, -3 }};
-            kernelY = new float[3, 3] {
+            kernelY = new double[3, 3] {
                 { 3, 10, 3 },
                 { 0, 0, 0 },
                 { -3, -10, -3 }};

@@ -65,4 +65,55 @@ namespace Filters
             return Color.FromArgb(0, color.G, color.B);
         }
     }
+
+    // YIQ
+
+    public class yYIQFilter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color c = sourceImage.GetPixel(x, y);
+            int Intensity = (int)(0.299 * c.R + 0.587 * c.G + 0.114 * c.B);
+            return Color.FromArgb(Intensity, Intensity, Intensity);
+        }
+    }
+
+    public class iYIQFilter : Filter
+    {
+        double min_Intensity = -0.274 * 255 - 0.322 * 255;
+        double max_Intensity = 0.596 * 255;
+        Color l = Color.FromArgb(0, 255, 255);
+        Color r = Color.FromArgb(255, 0, 0);
+
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color c = sourceImage.GetPixel(x, y);
+            double Intensity = 0.596 * c.R - 0.274 * c.G - 0.322 * c.B;
+            int R = (int)((Intensity - min_Intensity) / (max_Intensity - min_Intensity) * (r.R - l.R) + l.R);
+            int G = (int)((Intensity - min_Intensity) / (max_Intensity - min_Intensity) * (r.G - l.G) + l.G);
+            int B = (int)((Intensity - min_Intensity) / (max_Intensity - min_Intensity) * (r.B - l.B) + l.B);
+            return Color.FromArgb(R, G, B);
+        }
+    }
+
+    public class qYIQFilter : Filter
+    {
+        double min_Intensity = -0.522 * 255;
+        double max_Intensity = 0.211 * 255 + 0.311 * 255;
+        Color l = Color.FromArgb(0, 255, 0);
+        Color r = Color.FromArgb(255, 0, 255);
+
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color c = sourceImage.GetPixel(x, y);
+            double Intensity = 0.211 * c.R - 0.522 * c.G + 0.311 * c.B;
+            int R = (int)((Intensity - min_Intensity) / (max_Intensity - min_Intensity) * (r.R - l.R) + l.R);
+            int G = (int)((Intensity - min_Intensity) / (max_Intensity - min_Intensity) * (r.G - l.G) + l.G);
+            int B = (int)((Intensity - min_Intensity) / (max_Intensity - min_Intensity) * (r.B - l.B) + l.B);
+            R = Clamp(R, 0, 255);
+            G = Clamp(G, 0, 255);
+            B = Clamp(B, 0, 255);
+            return Color.FromArgb(R, G, B);
+        }
+    }
 }

@@ -18,7 +18,7 @@ namespace Filters
 
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / resultImage.Width * MaxPercent) + add);
+                worker.ReportProgress((int)((double)i / resultImage.Width * MaxPercent) + add);
                 if (worker.CancellationPending)
                     return null;
                 for (int j = 0; j < sourceImage.Height; j++)
@@ -258,7 +258,7 @@ namespace Filters
             long brightness = 0;
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / sourceImage.Width * MaxPercent));
+                worker.ReportProgress((int)((double)i / sourceImage.Width * MaxPercent));
                 if (worker.CancellationPending)
                     return 0;
                 for (int j = 0; j < sourceImage.Height; j++)
@@ -284,7 +284,7 @@ namespace Filters
             R = G = B = 0;
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / sourceImage.Width * MaxPercent) + add);
+                worker.ReportProgress((int)((double)i / sourceImage.Width * MaxPercent) + add);
                 if (worker.CancellationPending)
                     return;
                 for (int j = 0; j < sourceImage.Height; j++)
@@ -305,7 +305,7 @@ namespace Filters
             R = G = B = 0;
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / sourceImage.Width * MaxPercent) + add);
+                worker.ReportProgress((int)((double)i / sourceImage.Width * MaxPercent) + add);
                 if (worker.CancellationPending)
                     return;
                 for (int j = 0; j < sourceImage.Height; j++)
@@ -327,7 +327,7 @@ namespace Filters
             long tR = 0, tG = 0, tB = 0;
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / sourceImage.Width * MaxPercent) + add);
+                worker.ReportProgress((int)((double)i / sourceImage.Width * MaxPercent) + add);
                 if (worker.CancellationPending)
                     return;
                 for (int j = 0; j < sourceImage.Height; j++)
@@ -356,7 +356,7 @@ namespace Filters
 
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / resultImage.Width * 50) + 50);
+                worker.ReportProgress((int)((double)i / resultImage.Width * 50) + 50);
                 if (worker.CancellationPending)
                     return null;
                 for (int j = 0; j < sourceImage.Height; j++)
@@ -370,7 +370,7 @@ namespace Filters
 
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
-            float c = 1.2f;
+            double c = 1.2f;
             Color sourceColor = sourceImage.GetPixel(x, y);
             return Color.FromArgb(Clamp((int)(brightness + (sourceColor.R - brightness) * c), 0, 255),
                                   Clamp((int)(brightness + (sourceColor.G - brightness) * c), 0, 255),
@@ -392,7 +392,7 @@ namespace Filters
 
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / resultImage.Width * (100 - 33 - 33)) + (33 + 33));
+                worker.ReportProgress((int)((double)i / resultImage.Width * (100 - 33 - 33)) + (33 + 33));
                 if (worker.CancellationPending)
                     return null;
                 for (int j = 0; j < sourceImage.Height; j++)
@@ -426,7 +426,7 @@ namespace Filters
             Avg = (AvgR + AvgG + AvgB) / 3;
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / resultImage.Width * 50) + 50);
+                worker.ReportProgress((int)((double)i / resultImage.Width * 50) + 50);
                 if (worker.CancellationPending)
                     return null;
                 for (int j = 0; j < sourceImage.Height; j++)
@@ -441,9 +441,9 @@ namespace Filters
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             Color sourceColor = sourceImage.GetPixel(x, y);
-            return Color.FromArgb(Clamp((int)((float)(sourceColor.R * Avg / AvgR)),0,255),
-                                  Clamp((int)((float)(sourceColor.G * Avg / AvgG)),0,255),
-                                  Clamp((int)((float)(sourceColor.B * Avg / AvgB)),0,255));
+            return Color.FromArgb(Clamp((int)((double)(sourceColor.R * Avg / AvgR)),0,255),
+                                  Clamp((int)((double)(sourceColor.G * Avg / AvgG)),0,255),
+                                  Clamp((int)((double)(sourceColor.B * Avg / AvgB)),0,255));
         }
     }
 
@@ -459,7 +459,7 @@ namespace Filters
            
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / resultImage.Width * 50) + 50);
+                worker.ReportProgress((int)((double)i / resultImage.Width * 50) + 50);
                 if (worker.CancellationPending)
                     return null;
                 for (int j = 0; j < sourceImage.Height; j++)
@@ -474,18 +474,18 @@ namespace Filters
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             Color sourceColor = sourceImage.GetPixel(x, y);
-            return Color.FromArgb(Clamp((int)((float)(sourceColor.R * 255 / maxR)), 0, 255),
-                                  Clamp((int)((float)(sourceColor.G * 255 / maxG)), 0, 255),
-                                  Clamp((int)((float)(sourceColor.B * 255 / maxB)), 0, 255));
+            return Color.FromArgb(Clamp((int)((double)(sourceColor.R * 255 / maxR)), 0, 255),
+                                  Clamp((int)((double)(sourceColor.G * 255 / maxG)), 0, 255),
+                                  Clamp((int)((double)(sourceColor.B * 255 / maxB)), 0, 255));
         }
     }
 
     public class ReferenceColorFilter : GlobalFilter
     {
         // Целевой цвет:
-        float dstR = 92, dstG = 120, dstB = 126;
+        double dstR = 92, dstG = 120, dstB = 126;
 
-        float srcR, srcG, srcB;
+        double srcR, srcG, srcB;
 
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
         {
@@ -502,7 +502,7 @@ namespace Filters
             
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / resultImage.Width * MaxPercent) + add);
+                worker.ReportProgress((int)((double)i / resultImage.Width * MaxPercent) + add);
                 if (worker.CancellationPending)
                     return null;
                 for (int j = 0; j < sourceImage.Height; j++)
@@ -518,9 +518,9 @@ namespace Filters
         {
             Color sourceColor = sourceImage.GetPixel(x, y);
 
-            return Color.FromArgb(Clamp((int)((float)(sourceColor.R * (dstR / srcR))), 0, 255),
-                                  Clamp((int)((float)(sourceColor.G * (dstG / srcG))), 0, 255),
-                                  Clamp((int)((float)(sourceColor.B * (dstB / srcB))), 0, 255));
+            return Color.FromArgb(Clamp((int)((double)(sourceColor.R * (dstR / srcR))), 0, 255),
+                                  Clamp((int)((double)(sourceColor.G * (dstG / srcG))), 0, 255),
+                                  Clamp((int)((double)(sourceColor.B * (dstB / srcB))), 0, 255));
         }
     }
 
@@ -614,13 +614,13 @@ namespace Filters
 
     public class MorphologicalFilters : Filter
     {
-        protected float[,] mask = null;
+        protected double[,] mask = null;
         protected int n;
         protected int m;
 
         public MorphologicalFilters()
         {
-            mask = new float[,] {
+            mask = new double[,] {
                 { 1, 1, 1, 1, 1 },
                 { 1, 1, 1, 1, 1 },
                 { 1, 1, 1, 1, 1 },
@@ -718,7 +718,7 @@ namespace Filters
 
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / resultImage.Width * 50) + 50);
+                worker.ReportProgress((int)((double)i / resultImage.Width * 50) + 50);
                 if (worker.CancellationPending)
                     return null;
                 for (int j = 0; j < sourceImage.Height; j++)
@@ -745,7 +745,7 @@ namespace Filters
 
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / resultImage.Width * 50) + 50);
+                worker.ReportProgress((int)((double)i / resultImage.Width * 50) + 50);
                 if (worker.CancellationPending)
                     return null;
                 for (int j = 0; j < sourceImage.Height; j++)
@@ -776,7 +776,7 @@ namespace Filters
 
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / resultImage.Width * 34) + 66);
+                worker.ReportProgress((int)((double)i / resultImage.Width * 34) + 66);
                 if (worker.CancellationPending)
                     return null;
                 for (int j = 0; j < sourceImage.Height; j++)
