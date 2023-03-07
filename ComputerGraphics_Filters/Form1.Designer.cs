@@ -194,7 +194,7 @@
             this.sepia_ToolStripMenuItem,
             this.increaseBrightness_ЯркостьToolStripMenuItem});
             this.dot_ToolStripMenuItem.Name = "dot_ToolStripMenuItem";
-            this.dot_ToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
+            this.dot_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.dot_ToolStripMenuItem.Text = "Точечные";
             // 
             // invert_ToolStripMenuItem
@@ -233,7 +233,7 @@
             this.sharpness_ToolStripMenuItem1,
             this.embossingToolStripMenuItem});
             this.matrix_ToolStripMenuItem.Name = "matrix_ToolStripMenuItem";
-            this.matrix_ToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
+            this.matrix_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.matrix_ToolStripMenuItem.Text = "Матричные";
             // 
             // blur_ToolStripMenuItem1
@@ -280,21 +280,21 @@
             // prewitt_ToolStripMenuItem
             // 
             this.prewitt_ToolStripMenuItem.Name = "prewitt_ToolStripMenuItem";
-            this.prewitt_ToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
-            this.prewitt_ToolStripMenuItem.Text = "Оператор Прюитта";
+            this.prewitt_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.prewitt_ToolStripMenuItem.Text = "Оператор Прюитт";
             this.prewitt_ToolStripMenuItem.Click += new System.EventHandler(this.Prewitt_ToolStripMenuItem_Click);
             // 
             // sobel_ToolStripMenuItem
             // 
             this.sobel_ToolStripMenuItem.Name = "sobel_ToolStripMenuItem";
-            this.sobel_ToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
+            this.sobel_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.sobel_ToolStripMenuItem.Text = "Оператор Собеля";
             this.sobel_ToolStripMenuItem.Click += new System.EventHandler(this.Sobel_ToolStripMenuItem_Click);
             // 
             // scharr_ToolStripMenuItem
             // 
             this.scharr_ToolStripMenuItem.Name = "scharr_ToolStripMenuItem";
-            this.scharr_ToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
+            this.scharr_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.scharr_ToolStripMenuItem.Text = "Оператор Щарра";
             this.scharr_ToolStripMenuItem.Click += new System.EventHandler(this.Scharr_ToolStripMenuItem_Click);
             // 
@@ -337,7 +337,7 @@
             this.waves2_ToolStripMenuItem,
             this.glass_ToolStripMenuItem});
             this.geometric_ToolStripMenuItem.Name = "geometric_ToolStripMenuItem";
-            this.geometric_ToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
+            this.geometric_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.geometric_ToolStripMenuItem.Text = "Геометрические";
             // 
             // move_ToolStripMenuItem
@@ -382,27 +382,27 @@
             this.maximum_ToolStripMenuItem,
             this.minimum_ToolStripMenuItem});
             this.nonLinear_ToolStripMenuItem.Name = "nonLinear_ToolStripMenuItem";
-            this.nonLinear_ToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
+            this.nonLinear_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.nonLinear_ToolStripMenuItem.Text = "Нелинейные";
             // 
             // median_ToolStripMenuItem
             // 
             this.median_ToolStripMenuItem.Name = "median_ToolStripMenuItem";
-            this.median_ToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.median_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.median_ToolStripMenuItem.Text = "Медианный";
             this.median_ToolStripMenuItem.Click += new System.EventHandler(this.Median_ToolStripMenuItem_Click);
             // 
             // maximum_ToolStripMenuItem
             // 
             this.maximum_ToolStripMenuItem.Name = "maximum_ToolStripMenuItem";
-            this.maximum_ToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.maximum_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.maximum_ToolStripMenuItem.Text = "Максимальный";
             this.maximum_ToolStripMenuItem.Click += new System.EventHandler(this.Maximum_ToolStripMenuItem_Click);
             // 
             // minimum_ToolStripMenuItem
             // 
             this.minimum_ToolStripMenuItem.Name = "minimum_ToolStripMenuItem";
-            this.minimum_ToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.minimum_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.minimum_ToolStripMenuItem.Text = "Минимальный";
             this.minimum_ToolStripMenuItem.Click += new System.EventHandler(this.Minimum_ToolStripMenuItem_Click);
             // 
@@ -415,7 +415,7 @@
             this.perfectReflector_ToolStripMenuItem,
             this.referenceColor_ToolStripMenuItem});
             this.global_ToolStripMenuItem.Name = "global_ToolStripMenuItem";
-            this.global_ToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
+            this.global_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.global_ToolStripMenuItem.Text = "Глобальные";
             // 
             // contrast_ToolStripMenuItem
@@ -458,7 +458,7 @@
             this.noises_ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saltAndPepper_ToolStripMenuItem});
             this.noises_ToolStripMenuItem.Name = "noises_ToolStripMenuItem";
-            this.noises_ToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
+            this.noises_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.noises_ToolStripMenuItem.Text = "Шумы";
             // 
             // saltAndPepper_ToolStripMenuItem
@@ -474,7 +474,7 @@
             this.quantization_ToolStripMenuItem,
             this.floydSteinbergDithering_ToolStripMenuItem});
             this.dithering_ToolStripMenuItem.Name = "dithering_ToolStripMenuItem";
-            this.dithering_ToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
+            this.dithering_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.dithering_ToolStripMenuItem.Text = "Дизеринг";
             // 
             // quantization_ToolStripMenuItem
@@ -502,7 +502,7 @@
             this.blackHat_ToolStripMenuItem,
             this.grad_ToolStripMenuItem});
             this.morphological_ToolStripMenuItem.Name = "morphological_ToolStripMenuItem";
-            this.morphological_ToolStripMenuItem.Size = new System.Drawing.Size(221, 26);
+            this.morphological_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.morphological_ToolStripMenuItem.Text = "Морфологические";
             // 
             // dilation_ToolStripMenuItem
