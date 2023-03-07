@@ -95,13 +95,9 @@ namespace Filters
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             if (x + 50 < sourceImage.Width && y + 20 < sourceImage.Height)
-            {
                 return sourceImage.GetPixel(x + 50, y + 20);
-            }
             else
-            {
                 return Color.FromArgb(0, 0, 0);
-            }
         }
     }
 
@@ -116,13 +112,9 @@ namespace Filters
             int new_x = (int)((x - x0) * Math.Cos(alpha)) - (int)((y - y0) * Math.Sin(alpha)) + x0;
             int new_y = (int)((x - x0) * Math.Sin(alpha)) + (int)((y - y0) * Math.Cos(alpha)) + y0;
             if (new_x >= 0 && new_x < sourceImage.Width && new_y >= 0 && new_y < sourceImage.Height)
-            {
                 return sourceImage.GetPixel(new_x, new_y);
-            }
             else
-            {
                 return Color.FromArgb(0, 0, 0);
-            }
         }
     }
 
@@ -370,7 +362,7 @@ namespace Filters
 
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
-            double c = 1.2f;
+            double c = 1.2;
             Color sourceColor = sourceImage.GetPixel(x, y);
             return Color.FromArgb(Clamp((int)(brightness + (sourceColor.R - brightness) * c), 0, 255),
                                   Clamp((int)(brightness + (sourceColor.G - brightness) * c), 0, 255),
@@ -441,9 +433,9 @@ namespace Filters
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             Color sourceColor = sourceImage.GetPixel(x, y);
-            return Color.FromArgb(Clamp((int)((double)(sourceColor.R * Avg / AvgR)),0,255),
-                                  Clamp((int)((double)(sourceColor.G * Avg / AvgG)),0,255),
-                                  Clamp((int)((double)(sourceColor.B * Avg / AvgB)),0,255));
+            return Color.FromArgb(Clamp((int)((double)(sourceColor.R * Avg / AvgR)), 0, 255),
+                                  Clamp((int)((double)(sourceColor.G * Avg / AvgG)), 0, 255),
+                                  Clamp((int)((double)(sourceColor.B * Avg / AvgB)), 0, 255));
         }
     }
 
@@ -451,12 +443,12 @@ namespace Filters
     {
         protected int maxR, maxG, maxB;
 
-        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker,int MaxPercent = 100, int add = 0)
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
 
             GetMax(sourceImage, out maxR, out maxG, out maxB, worker, 50, 0);
-           
+
             for (int i = 0; i < sourceImage.Width; i++)
             {
                 worker.ReportProgress((int)((double)i / resultImage.Width * 50) + 50);
@@ -529,8 +521,8 @@ namespace Filters
     public class SaltAndPepperFilter : Filter
     {
         protected readonly Random random = new Random();
-        protected double p_white = 0.05f;
-        protected double p_black = 0.05f;
+        protected double p_white = 0.05;
+        protected double p_black = 0.05;
 
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
@@ -614,20 +606,18 @@ namespace Filters
 
     public class MorphologicalFilters : Filter
     {
-        protected double[,] mask = null;
+        protected double[,] structuring_element = null;
         protected int n;
         protected int m;
 
         public MorphologicalFilters()
         {
-            mask = new double[,] {
-                { 1, 1, 1, 1, 1 },
-                { 1, 1, 1, 1, 1 },
-                { 1, 1, 1, 1, 1 },
-                { 1, 1, 1, 1, 1 },
-                { 1, 1, 1, 1, 1 }};
-            n = mask.GetLength(0) / 2;
-            m = mask.GetLength(1) / 2;
+            structuring_element = new double[,] {
+                { 0, 1, 0 },
+                { 1, 1, 1 },
+                { 0, 1, 0 } };
+            n = structuring_element.GetLength(0) / 2;
+            m = structuring_element.GetLength(1) / 2;
         }
 
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
@@ -649,7 +639,7 @@ namespace Filters
                 {
                     int xx = x + i;
                     int yy = y + j;
-                    if (mask[i + n, j + m] == 1 && xx >= 0 && yy >= 0 && xx < sourceImage.Width && yy < sourceImage.Height)
+                    if (structuring_element[i + n, j + m] == 1 && xx >= 0 && yy >= 0 && xx < sourceImage.Width && yy < sourceImage.Height)
                     {
                         Color color = sourceImage.GetPixel(xx, yy);
                         maxR = Math.Max(maxR, color.R);
@@ -675,7 +665,7 @@ namespace Filters
                 {
                     int xx = x + i;
                     int yy = y + j;
-                    if (mask[i + n, j + m] == 1 && xx >= 0 && yy >= 0 && xx < sourceImage.Width && yy < sourceImage.Height)
+                    if (structuring_element[i + n, j + m] == 1 && xx >= 0 && yy >= 0 && xx < sourceImage.Width && yy < sourceImage.Height)
                     {
                         Color color = sourceImage.GetPixel(xx, yy);
                         minR = Math.Min(minR, color.R);

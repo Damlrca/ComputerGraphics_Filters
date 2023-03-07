@@ -46,7 +46,7 @@ namespace Filters
                 Clamp((int)resultR, 0, 255),
                 Clamp((int)resultG, 0, 255),
                 Clamp((int)resultB, 0, 255)
-                );
+            );
         }
     }
 
@@ -156,7 +156,7 @@ namespace Filters
                 Clamp((int)resultR, 0, 255),
                 Clamp((int)resultG, 0, 255),
                 Clamp((int)resultB, 0, 255)
-                );
+            );
         }
     }
 
