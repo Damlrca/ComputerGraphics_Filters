@@ -350,5 +350,18 @@ namespace ComputerGraphics_Filters
         {
             StartFilter(new ReferenceColorFilter());
         }
+
+        private void StatisticColorCorrection_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (backgroundWorker1.IsBusy == false)
+            {
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    Bitmap source = new Bitmap(openFileDialog1.FileName);
+                    Filter filter = new StatisticColorCorrectionFilter(source);
+                    StartFilter(filter);
+                }
+            }
+        }
     }
 }
