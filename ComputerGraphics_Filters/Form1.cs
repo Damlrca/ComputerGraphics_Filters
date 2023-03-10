@@ -229,6 +229,34 @@ namespace ComputerGraphics_Filters
             StartFilter(new AutolevelsFilter());
         }
 
+        private void GrayWorld_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartFilter(new GrayWorldFilter());
+        }
+
+        private void PerfectReflector_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartFilter(new PerfectReflectorFilter());
+        }
+
+        private void ReferenceColorCorrection_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartFilter(new ReferenceColorFilter());
+        }
+
+        private void StatisticColorCorrection_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (backgroundWorker1.IsBusy == false)
+            {
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    Bitmap source = new Bitmap(openFileDialog1.FileName);
+                    Filter filter = new StatisticColorCorrectionFilter(source);
+                    StartFilter(filter);
+                }
+            }
+        }
+
         // Шумы
 
         private void SaltAndPepper_ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -287,6 +315,45 @@ namespace ComputerGraphics_Filters
             StartFilter(new qYIQFilter());
         }
 
+        // CMY
+
+        private void cCMYToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartFilter(new cCMYFilter());
+        }
+
+        private void mCMYToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartFilter(new mCMYFilter());
+        }
+
+        private void yCMYToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartFilter(new yCMYFilter());
+        }
+
+        // CMYK
+
+        private void cCMYK_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartFilter(new cCMYKFilter());
+        }
+
+        private void mCMYK_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartFilter(new mCMYKFilter());
+        }
+
+        private void yCMYK_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartFilter(new yCMYKFilter());
+        }
+
+        private void kCMYK_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartFilter(new kCMYKFilter());
+        }
+
         // Квантование и дизеринг
 
         private void Quantization_ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -300,16 +367,6 @@ namespace ComputerGraphics_Filters
         }
 
         // Морфологические фильтры
-
-        private void GrayWorld_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            StartFilter(new GrayWorldFilter());
-        }
-
-        private void PerfectReflector_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            StartFilter(new PerfectReflectorFilter());
-        }
 
         private void Dilation_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -344,11 +401,6 @@ namespace ComputerGraphics_Filters
         private void Grad_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             StartFilter(new MorphologicalGradFilter());
-        }
-
-        private void ReferenceColorCorrection_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            StartFilter(new ReferenceColorFilter());
         }
     }
 }

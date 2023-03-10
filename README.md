@@ -41,6 +41,14 @@
 ![scott](sample_images/scott.png)
 ![dithering scott](sample_images/scott_dither.png)
 
+***Статистическая цветокоррекция***
+
+![fallout](sample_images/fallout.png)
+**+**
+![fallout color](sample_images/fallout_color.png)
+**=**
+![fallout result](sample_images/fallout_result.png)
+
 ### Список реализованных фильтров
 
 - Точечные фильтры
@@ -74,6 +82,7 @@
 	- "Серый мир"
 	- "Идеальный отражатель"
 	- Коррекция с опорным цветом
+	- Статистическая цветокоррекция
 - Добавление шумов
 	- "Соль и перец"
 - Квантование и дизеринг
@@ -86,7 +95,7 @@
 	- Black Hat
 	- Grad
 
-А также разбиение на каналы RGB, YIQ.
+А также разбиение на каналы RGB, YIQ, CMY, CMYK.
 
 ### Другие особенности работы
 

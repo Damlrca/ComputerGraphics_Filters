@@ -334,6 +334,57 @@ namespace Filters
             G = (int)tG / (sourceImage.Width * sourceImage.Height);
             B = (int)tB / (sourceImage.Width * sourceImage.Height);
         }
+
+        /// <summary>
+        /// Возращает математическое ожидание по каждому каналу
+        /// </summary>
+        public void GetE(Bitmap sourceImage, out double Er, out double Eg, out double Eb, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
+        {
+            Er = Eg = Eb = 0;
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                worker.ReportProgress((int)((double)i / sourceImage.Width * MaxPercent) + add);
+                if (worker.CancellationPending)
+                    return;
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    Color color = sourceImage.GetPixel(i, j);
+                    Er += color.R;
+                    Eg += color.G;
+                    Eb += color.B;
+                }
+            }
+            Er /= sourceImage.Width * sourceImage.Height;
+            Eg /= sourceImage.Width * sourceImage.Height;
+            Eb /= sourceImage.Width * sourceImage.Height;
+        }
+
+        /// <summary>
+        /// Возвращает среднеквадратическое отклонение по каждому каналу
+        /// </summary>
+        public void GetSI(Bitmap sourceImage, out double SIr, out double SIg, out double SIb, double Er, double Eg, double Eb, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
+        {
+            SIr = SIg = SIb = 0;
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                worker.ReportProgress((int)((double)i / sourceImage.Width * MaxPercent) + add);
+                if (worker.CancellationPending)
+                    return;
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    Color color = sourceImage.GetPixel(i, j);
+                    SIr += (Er - color.R) * (Er - color.R);
+                    SIg += (Eg - color.G) * (Eg - color.G);
+                    SIb += (Eb - color.B) * (Eb - color.B);
+                }
+            }
+            SIr = Math.Sqrt(SIr);
+            SIg = Math.Sqrt(SIg);
+            SIb = Math.Sqrt(SIb);
+            SIr /= Math.Sqrt(sourceImage.Width * sourceImage.Height);
+            SIg /= Math.Sqrt(sourceImage.Width * sourceImage.Height);
+            SIb /= Math.Sqrt(sourceImage.Width * sourceImage.Height);
+        }
     }
 
     public class ContrastFilter : GlobalFilter
@@ -513,6 +564,52 @@ namespace Filters
             return Color.FromArgb(Clamp((int)((double)(sourceColor.R * (dstR / srcR))), 0, 255),
                                   Clamp((int)((double)(sourceColor.G * (dstG / srcG))), 0, 255),
                                   Clamp((int)((double)(sourceColor.B * (dstB / srcB))), 0, 255));
+        }
+    }
+
+    public class StatisticColorCorrectionFilter : GlobalFilter
+    {
+        protected readonly Bitmap source;
+
+        protected double EsR, EsG, EsB;
+        protected double ErR, ErG, ErB;
+        protected double SIsR, SIsG, SIsB;
+        protected double SIrR, SIrG, SIrB;
+
+        public StatisticColorCorrectionFilter(Bitmap source)
+        {
+            this.source = source;
+        }
+
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
+        {
+            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+
+            GetE(source, out EsR, out EsG, out EsB, worker, 20, 0);
+            GetE(sourceImage, out ErR, out ErG, out ErB, worker, 20, 20);
+            GetSI(source, out SIsR, out SIsG, out SIsB, EsR, EsG, EsB, worker, 20, 40);
+            GetSI(sourceImage, out SIrR, out SIrG, out SIrB, ErR, ErG, ErB, worker, 20, 60);
+
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                worker.ReportProgress((int)((double)i / resultImage.Width * 20) + 80);
+                if (worker.CancellationPending)
+                    return null;
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    resultImage.SetPixel(i, j, calculateNewPixelColor(sourceImage, i, j));
+                }
+            }
+
+            return resultImage;
+        }
+
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color sourceColor = sourceImage.GetPixel(x, y);
+            return Color.FromArgb(Clamp((int)(EsR + (sourceColor.R - ErR) * SIsR / SIrR), 0, 255),
+                                  Clamp((int)(EsG + (sourceColor.G - ErG) * SIsG / SIrG), 0, 255),
+                                  Clamp((int)(EsB + (sourceColor.B - ErB) * SIsB / SIrB), 0, 255));
         }
     }
 

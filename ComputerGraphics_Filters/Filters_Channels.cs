@@ -116,4 +116,81 @@ namespace Filters
             return Color.FromArgb(R, G, B);
         }
     }
+
+    // CMY
+
+    public class cCMYFilter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color color = sourceImage.GetPixel(x, y);
+            int c = 255 - color.R;
+            return Color.FromArgb(255 - c, 255, 255);
+        }
+    }
+
+    public class mCMYFilter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color color = sourceImage.GetPixel(x, y);
+            int m = 255 - color.G;
+            return Color.FromArgb(255, 255 - m, 255);
+        }
+    }
+
+    public class yCMYFilter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color color = sourceImage.GetPixel(x, y);
+            int _y = 255 - color.B;
+            return Color.FromArgb(255, 255, 255 - _y);
+        }
+    }
+
+    // CMYK
+
+    public class cCMYKFilter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color color = sourceImage.GetPixel(x, y);
+            int k = 255 - Math.Max(Math.Max(color.R, color.G), color.B);
+            int c = (255 - color.R) - k;
+            return Color.FromArgb(255 - c, 255, 255);
+        }
+    }
+
+    public class mCMYKFilter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color color = sourceImage.GetPixel(x, y);
+            int k = 255 - Math.Max(Math.Max(color.R, color.G), color.B);
+            int m = (255 - color.G) - k;
+            return Color.FromArgb(255, 255 - m, 255);
+        }
+    }
+
+    public class yCMYKFilter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color color = sourceImage.GetPixel(x, y);
+            int k = 255 - Math.Max(Math.Max(color.R, color.G), color.B);
+            int _y = (255 - color.B) - k;
+            return Color.FromArgb(255, 255, 255 - _y);
+        }
+    }
+
+    public class kCMYKFilter : Filter
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color color = sourceImage.GetPixel(x, y);
+            int k = 255 - Math.Max(Math.Max(color.R, color.G), color.B);
+            return Color.FromArgb(255 - k, 255 - k, 255 - k);
+        }
+    }
 }
