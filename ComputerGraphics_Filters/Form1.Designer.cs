@@ -96,6 +96,11 @@
             this.yYIQ_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iYIQ_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.qYIQ_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CMYK_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cCMYK_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mCMYK_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.yCMYK_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kCMYK_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -103,7 +108,10 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
+            this.CMY_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cCMY_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mCMY_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.yCMY_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -119,7 +127,7 @@
             this.channels_ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(582, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(582, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -568,7 +576,9 @@
             // 
             this.channels_ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.RGB_ToolStripMenuItem,
-            this.YIQ_ToolStripMenuItem});
+            this.YIQ_ToolStripMenuItem,
+            this.CMY_ToolStripMenuItem,
+            this.CMYK_ToolStripMenuItem});
             this.channels_ToolStripMenuItem.Name = "channels_ToolStripMenuItem";
             this.channels_ToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
             this.channels_ToolStripMenuItem.Text = "Каналы";
@@ -583,7 +593,7 @@
             this.rbRGB_ToolStripMenuItem,
             this.gbRGB_ToolStripMenuItem});
             this.RGB_ToolStripMenuItem.Name = "RGB_ToolStripMenuItem";
-            this.RGB_ToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
+            this.RGB_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.RGB_ToolStripMenuItem.Text = "RGB";
             // 
             // rRGB_ToolStripMenuItem
@@ -635,29 +645,68 @@
             this.iYIQ_ToolStripMenuItem,
             this.qYIQ_ToolStripMenuItem});
             this.YIQ_ToolStripMenuItem.Name = "YIQ_ToolStripMenuItem";
-            this.YIQ_ToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
+            this.YIQ_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.YIQ_ToolStripMenuItem.Text = "YIQ";
             // 
             // yYIQ_ToolStripMenuItem
             // 
             this.yYIQ_ToolStripMenuItem.Name = "yYIQ_ToolStripMenuItem";
-            this.yYIQ_ToolStripMenuItem.Size = new System.Drawing.Size(103, 26);
+            this.yYIQ_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.yYIQ_ToolStripMenuItem.Text = "Y";
             this.yYIQ_ToolStripMenuItem.Click += new System.EventHandler(this.yYIQ_ToolStripMenuItem_Click);
             // 
             // iYIQ_ToolStripMenuItem
             // 
             this.iYIQ_ToolStripMenuItem.Name = "iYIQ_ToolStripMenuItem";
-            this.iYIQ_ToolStripMenuItem.Size = new System.Drawing.Size(103, 26);
+            this.iYIQ_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.iYIQ_ToolStripMenuItem.Text = "I";
             this.iYIQ_ToolStripMenuItem.Click += new System.EventHandler(this.iYIQ_ToolStripMenuItem_Click);
             // 
             // qYIQ_ToolStripMenuItem
             // 
             this.qYIQ_ToolStripMenuItem.Name = "qYIQ_ToolStripMenuItem";
-            this.qYIQ_ToolStripMenuItem.Size = new System.Drawing.Size(103, 26);
+            this.qYIQ_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.qYIQ_ToolStripMenuItem.Text = "Q";
             this.qYIQ_ToolStripMenuItem.Click += new System.EventHandler(this.qYIQ_ToolStripMenuItem_Click);
+            // 
+            // CMYK_ToolStripMenuItem
+            // 
+            this.CMYK_ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cCMYK_ToolStripMenuItem,
+            this.mCMYK_ToolStripMenuItem,
+            this.yCMYK_ToolStripMenuItem,
+            this.kCMYK_ToolStripMenuItem});
+            this.CMYK_ToolStripMenuItem.Name = "CMYK_ToolStripMenuItem";
+            this.CMYK_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.CMYK_ToolStripMenuItem.Text = "CMYK";
+            // 
+            // cCMYK_ToolStripMenuItem
+            // 
+            this.cCMYK_ToolStripMenuItem.Name = "cCMYK_ToolStripMenuItem";
+            this.cCMYK_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.cCMYK_ToolStripMenuItem.Text = "C";
+            this.cCMYK_ToolStripMenuItem.Click += new System.EventHandler(this.cCMYK_ToolStripMenuItem_Click);
+            // 
+            // mCMYK_ToolStripMenuItem
+            // 
+            this.mCMYK_ToolStripMenuItem.Name = "mCMYK_ToolStripMenuItem";
+            this.mCMYK_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.mCMYK_ToolStripMenuItem.Text = "M";
+            this.mCMYK_ToolStripMenuItem.Click += new System.EventHandler(this.mCMYK_ToolStripMenuItem_Click);
+            // 
+            // yCMYK_ToolStripMenuItem
+            // 
+            this.yCMYK_ToolStripMenuItem.Name = "yCMYK_ToolStripMenuItem";
+            this.yCMYK_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.yCMYK_ToolStripMenuItem.Text = "Y";
+            this.yCMYK_ToolStripMenuItem.Click += new System.EventHandler(this.yCMYK_ToolStripMenuItem_Click);
+            // 
+            // kCMYK_ToolStripMenuItem
+            // 
+            this.kCMYK_ToolStripMenuItem.Name = "kCMYK_ToolStripMenuItem";
+            this.kCMYK_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.kCMYK_ToolStripMenuItem.Text = "K";
+            this.kCMYK_ToolStripMenuItem.Click += new System.EventHandler(this.kCMYK_ToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 
@@ -671,7 +720,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(582, 373);
+            this.pictureBox1.Size = new System.Drawing.Size(582, 375);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -681,7 +730,7 @@
             this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar1.Location = new System.Drawing.Point(10, 383);
+            this.progressBar1.Location = new System.Drawing.Point(10, 385);
             this.progressBar1.Margin = new System.Windows.Forms.Padding(10);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(412, 30);
@@ -692,7 +741,7 @@
             this.cancel_button.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancel_button.Location = new System.Drawing.Point(442, 383);
+            this.cancel_button.Location = new System.Drawing.Point(442, 385);
             this.cancel_button.Margin = new System.Windows.Forms.Padding(10);
             this.cancel_button.Name = "cancel_button";
             this.cancel_button.Size = new System.Drawing.Size(130, 30);
@@ -718,12 +767,12 @@
             this.tableLayoutPanel1.Controls.Add(this.cancel_button, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 30);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 28);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(582, 423);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(582, 425);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // saveFileDialog1
@@ -731,9 +780,36 @@
             this.saveFileDialog1.FileName = "filename.png";
             this.saveFileDialog1.Filter = "Image files | *.png; *.jpg; *.bmp; | All files(*.*) | *.*";
             // 
-            // openFileDialog2
+            // CMY_ToolStripMenuItem
             // 
-            this.openFileDialog2.Filter = "Image files | *.png; *.jpg; *.bmp; | All files(*.*) | *.*";
+            this.CMY_ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cCMY_ToolStripMenuItem,
+            this.mCMY_ToolStripMenuItem,
+            this.yCMY_ToolStripMenuItem});
+            this.CMY_ToolStripMenuItem.Name = "CMY_ToolStripMenuItem";
+            this.CMY_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.CMY_ToolStripMenuItem.Text = "CMY";
+            // 
+            // cCMY_ToolStripMenuItem
+            // 
+            this.cCMY_ToolStripMenuItem.Name = "cCMY_ToolStripMenuItem";
+            this.cCMY_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.cCMY_ToolStripMenuItem.Text = "C";
+            this.cCMY_ToolStripMenuItem.Click += new System.EventHandler(this.cCMYToolStripMenuItem_Click);
+            // 
+            // mCMY_ToolStripMenuItem
+            // 
+            this.mCMY_ToolStripMenuItem.Name = "mCMY_ToolStripMenuItem";
+            this.mCMY_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.mCMY_ToolStripMenuItem.Text = "M";
+            this.mCMY_ToolStripMenuItem.Click += new System.EventHandler(this.mCMYToolStripMenuItem_Click);
+            // 
+            // yCMY_ToolStripMenuItem
+            // 
+            this.yCMY_ToolStripMenuItem.Name = "yCMY_ToolStripMenuItem";
+            this.yCMY_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.yCMY_ToolStripMenuItem.Text = "Y";
+            this.yCMY_ToolStripMenuItem.Click += new System.EventHandler(this.yCMYToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -832,7 +908,15 @@
         private System.Windows.Forms.ToolStripMenuItem iYIQ_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem qYIQ_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem statisticColorCorrection_ToolStripMenuItem;
-        private System.Windows.Forms.OpenFileDialog openFileDialog2;
+        private System.Windows.Forms.ToolStripMenuItem CMYK_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cCMYK_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mCMYK_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem yCMYK_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kCMYK_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CMY_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cCMY_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mCMY_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem yCMY_ToolStripMenuItem;
     }
 }
 
