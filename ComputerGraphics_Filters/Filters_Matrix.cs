@@ -76,10 +76,8 @@ namespace Filters
 
     public class GaussianFilter : MatrixFilter
     {
-        public GaussianFilter()
+        public GaussianFilter(int radius = 3, double sigma = 2)
         {
-            int radius = 3;
-            double sigma = 2;
             int size = radius * 2 + 1;
             kernel = new double[size, size];
             double norm = 0;
@@ -87,7 +85,7 @@ namespace Filters
             {
                 for (int j = -radius; j <= radius; j++)
                 {
-                    kernel[i + radius, j + radius] = (double)(Math.Exp(-(i * i + j * j) / (sigma * sigma)));
+                    kernel[i + radius, j + radius] = Math.Exp(-(i * i + j * j) / (sigma * sigma));
                     norm += kernel[i + radius, j + radius];
                 }
             }
@@ -157,6 +155,41 @@ namespace Filters
                 Clamp((int)resultG, 0, 255),
                 Clamp((int)resultB, 0, 255)
             );
+        }
+    }
+
+    public class LightingCompensationFilter : MatrixFilter
+    {
+        private Bitmap lightImage = null;
+
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker, int MaxPercent = 100, int add = 0)
+        {
+            Filter filter = new GaussianFilter(sigma: 15, radius: 5);
+            lightImage = filter.processImage(sourceImage, worker, 90, 0);
+            
+            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                worker.ReportProgress((int)((double)i / resultImage.Width * 10) + 90);
+                if (worker.CancellationPending)
+                    return null;
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    resultImage.SetPixel(i, j, calculateNewPixelColor(sourceImage, i, j));
+                }
+            }
+
+            return resultImage;
+        }
+
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color sourceColor = sourceImage.GetPixel(x, y);
+            Color lightColor = lightImage.GetPixel(x, y);
+            return Color.FromArgb(Clamp((int)(255.0 * sourceColor.R / lightColor.R), 0, 255),
+                                  Clamp((int)(255.0 * sourceColor.G / lightColor.G), 0, 255),
+                                  Clamp((int)(255.0 * sourceColor.B / lightColor.B), 0, 255));
         }
     }
 
