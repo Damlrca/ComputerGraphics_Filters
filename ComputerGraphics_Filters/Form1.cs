@@ -200,6 +200,11 @@ namespace ComputerGraphics_Filters
             StartFilter(new EmbossingFilter());
         }
 
+        private void LightingCompensation_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartFilter(new LightingCompensationFilter());
+        }
+
         // Фильтры выделения границы
 
         private void Prewitt_ToolStripMenuItem_Click(object sender, EventArgs e)
