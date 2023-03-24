@@ -26,6 +26,7 @@ namespace ComputerGraphics_Filters
 
         private void Open_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            openFileDialog1.Title = "Открытие исходного изображения:";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 previous_image = image;
@@ -37,6 +38,7 @@ namespace ComputerGraphics_Filters
 
         private void Save_as_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            saveFileDialog1.Title = "Сохранение результата:";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 image.Save(saveFileDialog1.FileName);
@@ -253,6 +255,7 @@ namespace ComputerGraphics_Filters
         {
             if (backgroundWorker1.IsBusy == false)
             {
+                openFileDialog1.Title = "Открытие целевого изображения:";
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     Bitmap source = new Bitmap(openFileDialog1.FileName);
