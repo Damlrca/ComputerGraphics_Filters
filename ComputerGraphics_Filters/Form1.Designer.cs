@@ -292,21 +292,21 @@
             // prewitt_ToolStripMenuItem
             // 
             this.prewitt_ToolStripMenuItem.Name = "prewitt_ToolStripMenuItem";
-            this.prewitt_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.prewitt_ToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
             this.prewitt_ToolStripMenuItem.Text = "Оператор Прюитт";
             this.prewitt_ToolStripMenuItem.Click += new System.EventHandler(this.Prewitt_ToolStripMenuItem_Click);
             // 
             // sobel_ToolStripMenuItem
             // 
             this.sobel_ToolStripMenuItem.Name = "sobel_ToolStripMenuItem";
-            this.sobel_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.sobel_ToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
             this.sobel_ToolStripMenuItem.Text = "Оператор Собеля";
             this.sobel_ToolStripMenuItem.Click += new System.EventHandler(this.Sobel_ToolStripMenuItem_Click);
             // 
             // scharr_ToolStripMenuItem
             // 
             this.scharr_ToolStripMenuItem.Name = "scharr_ToolStripMenuItem";
-            this.scharr_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.scharr_ToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
             this.scharr_ToolStripMenuItem.Text = "Оператор Щарра";
             this.scharr_ToolStripMenuItem.Click += new System.EventHandler(this.Scharr_ToolStripMenuItem_Click);
             // 
@@ -322,14 +322,14 @@
             // sharpness1_ToolStripMenuItem
             // 
             this.sharpness1_ToolStripMenuItem.Name = "sharpness1_ToolStripMenuItem";
-            this.sharpness1_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.sharpness1_ToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
             this.sharpness1_ToolStripMenuItem.Text = "Резкость1";
             this.sharpness1_ToolStripMenuItem.Click += new System.EventHandler(this.Sharpness1_ToolStripMenuItem_Click);
             // 
             // sharpness2_ToolStripMenuItem
             // 
             this.sharpness2_ToolStripMenuItem.Name = "sharpness2_ToolStripMenuItem";
-            this.sharpness2_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.sharpness2_ToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
             this.sharpness2_ToolStripMenuItem.Text = "Резкость2";
             this.sharpness2_ToolStripMenuItem.Click += new System.EventHandler(this.Sharpness2_ToolStripMenuItem_Click);
             // 
@@ -362,35 +362,35 @@
             // move_ToolStripMenuItem
             // 
             this.move_ToolStripMenuItem.Name = "move_ToolStripMenuItem";
-            this.move_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.move_ToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.move_ToolStripMenuItem.Text = "Перенос";
             this.move_ToolStripMenuItem.Click += new System.EventHandler(this.Move_ToolStripMenuItem_Click);
             // 
             // rotate_ToolStripMenuItem
             // 
             this.rotate_ToolStripMenuItem.Name = "rotate_ToolStripMenuItem";
-            this.rotate_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.rotate_ToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.rotate_ToolStripMenuItem.Text = "Поворот";
             this.rotate_ToolStripMenuItem.Click += new System.EventHandler(this.Rotate_ToolStripMenuItem_Click);
             // 
             // waves1_ToolStripMenuItem
             // 
             this.waves1_ToolStripMenuItem.Name = "waves1_ToolStripMenuItem";
-            this.waves1_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.waves1_ToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.waves1_ToolStripMenuItem.Text = "Волны1";
             this.waves1_ToolStripMenuItem.Click += new System.EventHandler(this.Waves1_ToolStripMenuItem_Click);
             // 
             // waves2_ToolStripMenuItem
             // 
             this.waves2_ToolStripMenuItem.Name = "waves2_ToolStripMenuItem";
-            this.waves2_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.waves2_ToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.waves2_ToolStripMenuItem.Text = "Волны2";
             this.waves2_ToolStripMenuItem.Click += new System.EventHandler(this.Waves2_ToolStripMenuItem_Click);
             // 
             // glass_ToolStripMenuItem
             // 
             this.glass_ToolStripMenuItem.Name = "glass_ToolStripMenuItem";
-            this.glass_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.glass_ToolStripMenuItem.Size = new System.Drawing.Size(153, 26);
             this.glass_ToolStripMenuItem.Text = "Стекло";
             this.glass_ToolStripMenuItem.Click += new System.EventHandler(this.Glass_ToolStripMenuItem_Click);
             // 
@@ -407,21 +407,21 @@
             // median_ToolStripMenuItem
             // 
             this.median_ToolStripMenuItem.Name = "median_ToolStripMenuItem";
-            this.median_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.median_ToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.median_ToolStripMenuItem.Text = "Медианный";
             this.median_ToolStripMenuItem.Click += new System.EventHandler(this.Median_ToolStripMenuItem_Click);
             // 
             // maximum_ToolStripMenuItem
             // 
             this.maximum_ToolStripMenuItem.Name = "maximum_ToolStripMenuItem";
-            this.maximum_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.maximum_ToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.maximum_ToolStripMenuItem.Text = "Максимальный";
             this.maximum_ToolStripMenuItem.Click += new System.EventHandler(this.Maximum_ToolStripMenuItem_Click);
             // 
             // minimum_ToolStripMenuItem
             // 
             this.minimum_ToolStripMenuItem.Name = "minimum_ToolStripMenuItem";
-            this.minimum_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.minimum_ToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
             this.minimum_ToolStripMenuItem.Text = "Минимальный";
             this.minimum_ToolStripMenuItem.Click += new System.EventHandler(this.Minimum_ToolStripMenuItem_Click);
             // 
@@ -602,7 +602,7 @@
             this.rbRGB_ToolStripMenuItem,
             this.gbRGB_ToolStripMenuItem});
             this.RGB_ToolStripMenuItem.Name = "RGB_ToolStripMenuItem";
-            this.RGB_ToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
+            this.RGB_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.RGB_ToolStripMenuItem.Text = "RGB";
             // 
             // rRGB_ToolStripMenuItem
@@ -654,7 +654,7 @@
             this.iYIQ_ToolStripMenuItem,
             this.qYIQ_ToolStripMenuItem});
             this.YIQ_ToolStripMenuItem.Name = "YIQ_ToolStripMenuItem";
-            this.YIQ_ToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
+            this.YIQ_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.YIQ_ToolStripMenuItem.Text = "YIQ";
             // 
             // yYIQ_ToolStripMenuItem
@@ -685,7 +685,7 @@
             this.mCMY_ToolStripMenuItem,
             this.yCMY_ToolStripMenuItem});
             this.CMY_ToolStripMenuItem.Name = "CMY_ToolStripMenuItem";
-            this.CMY_ToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
+            this.CMY_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.CMY_ToolStripMenuItem.Text = "CMY";
             // 
             // cCMY_ToolStripMenuItem
@@ -717,7 +717,7 @@
             this.yCMYK_ToolStripMenuItem,
             this.kCMYK_ToolStripMenuItem});
             this.CMYK_ToolStripMenuItem.Name = "CMYK_ToolStripMenuItem";
-            this.CMYK_ToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
+            this.CMYK_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.CMYK_ToolStripMenuItem.Text = "CMYK";
             // 
             // cCMYK_ToolStripMenuItem
@@ -830,7 +830,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(600, 500);
             this.Name = "Form1";
-            this.Text = "ComputerGraphics_Filters";
+            this.Text = "ComputerGraphics: Filters";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
