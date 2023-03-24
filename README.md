@@ -8,51 +8,49 @@
 
 ***Инверсия***
 
-![borsch](sample_images/borsch.png)
-![inverted borsch](sample_images/borsch_invert.png)
+|![borsch](sample_images/borsch.png)|![inverted borsch](sample_images/borsch_invert.png)|
+|-|-|
 
 ***Размытие по Гауссу***
 
-![butterfly](sample_images/butterfly.png)
-![gaussian blur butterfly](sample_images/butterfly_gauss.png)
+|![butterfly](sample_images/butterfly.png)|![gaussian blur butterfly](sample_images/butterfly_gauss.png)|
+|-|-|
 
 ***Выделение границ (Оператор Собеля)***
 
-![conrod](sample_images/conrod.png)
-![sobel operator conrod](sample_images/conrod_sobel.png)
+|![conrod](sample_images/conrod.png)|![sobel operator conrod](sample_images/conrod_sobel.png)|
+|-|-|
 
 ***Тиснение***
 
-![columns](sample_images/columns.png)
-![embossing columns](sample_images/columns_embossing.png)
+|![columns](sample_images/columns.png)|![embossing columns](sample_images/columns_embossing.png)|
+|-|-|
 
 ***Медианный фильтр (подавление шума "соль и перец")***
 
-![noisy crab](sample_images/crab_noisy.png)
-![median filter crab](sample_images/crab_median.png)
+|![noisy crab](sample_images/crab_noisy.png)|![median filter crab](sample_images/crab_median.png)|
+|-|-|
 
 ***Линейное растяжение гистограммы***
 
-![snowtree](sample_images/snowtree.png)
-![autolevels snowtree](sample_images/snowtree_autolevels.png)
+|![snowtree](sample_images/snowtree.png)|![autolevels snowtree](sample_images/snowtree_autolevels.png)|
+|-|-|
 
 ***Оттенки серого + Дизеринг***
 
-![scott](sample_images/scott.png)
-![dithering scott](sample_images/scott_dither.png)
+|![scott](sample_images/scott.png)|![dithering scott](sample_images/scott_dither.png)|
+|-|-|
 
 ***Статистическая цветокоррекция***
 
-![fallout](sample_images/fallout.png)
-**+**
-![fallout color](sample_images/fallout_color.png)
-**=**
-![fallout result](sample_images/fallout_result.png)
+Иначальное изображение + Целевое изображение = Результат
+|![fallout](sample_images/fallout.png)|![fallout color](sample_images/fallout_color.png)|![fallout result](sample_images/fallout_result.png)|
+|-|-|-|
 
 ***Компенсация разности освещения***
 
-![diffeq](sample_images/diffeq.png)
-![diffeq_comp](sample_images/diffeq_comp.png)
+|![diffeq](sample_images/diffeq.png)|![diffeq_comp](sample_images/diffeq_comp.png)|
+|-|-|
 
 ### Список реализованных фильтров
 
