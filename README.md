@@ -43,9 +43,9 @@
 
 ***Статистическая цветокоррекция***
 
-| |**+**|**=**|
-|:-|:-|:-|
-|<img src="./sample_images/fallout.png" alt="fallout" style="height: 100%;"/>|<img src="./sample_images/fallout_color.png" alt="fallout color" style="height: 100%;"/>|<img src="./sample_images/fallout_result.png" alt="fallout result" style="height: 100%;"/>|
+Иначальное изображение + Целевое изображение = Результат
+|![fallout](sample_images/fallout.png)|![fallout color](sample_images/fallout_color.png)|![fallout result](sample_images/fallout_result.png)|
+|-|-|-|
 
 ***Компенсация разности освещения***
 
