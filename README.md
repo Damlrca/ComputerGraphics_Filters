@@ -43,7 +43,7 @@
 
 ***Статистическая цветокоррекция***
 
-|Исходное|Целевое|Результат|
+| |**+**|**=**|
 |:-|:-|:-|
 |![fallout](sample_images/fallout.png)|![fallout color](sample_images/fallout_color.png)|![fallout result](sample_images/fallout_result.png)|
 
